@@ -1,0 +1,134 @@
+<mat-card class="p-0">
+    <mat-card-title class="align-items-center">
+        <div class="card-title-container ">
+            <div class="card-title-text ">Personel</div>
+            <div class="back-icon"> 
+            <a routerLink="/admin/personals" color="primary" mat-raised-button class="back-button">
+                <mat-icon>chevron_left</mat-icon>
+            </a>
+        </div>
+        </div>
+     
+        <mat-divider></mat-divider>
+      
+    </mat-card-title>
+    <mat-card-content>
+        <div *ngIf="personalForm">
+            <form [formGroup]="personalForm">
+                <div fxLayout="row wrap">
+                    <div fxFlex="100" fxFlex.gt-xs="50" class="pr-16">
+                        <div class="pb-16">
+                            <mat-form-field class="full-width">
+                                <input matInput name="firstname" formControlName="firstname" placeholder="Adı"
+                                    value="">
+                            </mat-form-field>
+                            <small
+                                *ngIf="personalForm.controls['firstname'].hasError('required') && personalForm.controls['firstname'].touched"
+                                class="form-error-msg"> Ad zorunlu </small>
+                        </div>
+                        <div class="pb-16">
+                            <mat-form-field class="full-width">
+                                <input matInput name="lastname" formControlName="lastname" placeholder="Soyadı"
+                                    value="">
+                            </mat-form-field>
+                            <small
+                                *ngIf="personalForm.controls['lastname'].hasError('required') && personalForm.controls['lastname'].touched"
+                                class="form-error-msg"> Soyadı zorunlu </small>
+                        </div>
+                        <div class="pb-16">
+                            <div class="flex-container">
+                              
+                            <mat-form-field class="flex-item">
+                                <input matInput name="title" formControlName="title" placeholder="Ünvan" value="">
+                              </mat-form-field>
+                              <mat-form-field class="flex-item">
+                                <input matInput type="email" name="email" formControlName="email"
+                                    placeholder="E-mail" value="">
+                                    <small
+                                    *ngIf="personalForm.controls['email'].hasError('email') && personalForm.controls['email'].touched"
+                                    class="form-error-msg"> Mail formatında değil </small>
+                            </mat-form-field>
+                           
+                            </div>
+                         
+                        </div>
+                        <div class="pb-16">
+                            <div class="flex-container">
+                                <mat-form-field class="flex-item">
+                                    <input matInput name="ext" formControlName="ext" placeholder="Dahili Numarası" value="">
+                                  </mat-form-field>
+                                <mat-form-field class="flex-item">
+                                    <input matInput name="mobile" formControlName="mobile" placeholder="Cep Numarası"
+                                        value="">
+                                </mat-form-field>
+                           
+                            </div>
+                        </div>
+                     
+                        <div class="pb-16">
+                            <div class="flex-container">                              
+                                <mat-form-field class="flex-item">
+                                    <input matInput name="dateOfBirth" formControlName="dateOfBirth" placeholder="Doğum Tarihi"
+                                        [matDatepicker]="appDatepicker">
+                                    <mat-datepicker-toggle matSuffix [for]="appDatepicker"></mat-datepicker-toggle>
+                                </mat-form-field>
+                                <mat-datepicker #appDatepicker></mat-datepicker>
+                                <mat-form-field class="flex-item">
+                                  <input matInput name="order" formControlName="order" placeholder="Sıra" value="">
+                                </mat-form-field>
+                              </div>
+                        </div>
+                        <div class="pb-16">
+                            <div class="flex-container">   
+                            <mat-form-field  class="flex-item" appearance="outline">
+                                <mat-select name="department" formControlName="department"  placeholder="Müdürlük" [required]="true">
+                                    <mat-option *ngFor="let department of deparmentList" [value]="department.id">
+                                        {{ department.name }}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                            <mat-form-field  class="flex-item" appearance="outline">
+                                <mat-select name="section" formControlName="section"  placeholder="Birim">
+                                    <mat-option *ngFor="let section of sectionListByDepartment" [value]="section ? section.id : null">
+                                        {{ section ? section.name : 'Seçiniz' }}
+                                      </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div fxFlex="100" fxFlex.gt-xs="50">
+                        <div class="pb-16" style="margin: 100px;">
+                           
+                                <div class="image-container">
+                                  <img [src]="displayProfileImageUrl" >
+                                </div>
+                             
+                              <div class="row" style="margin: 10px 35px;" *ngIf="!isNewPersonal">
+                                <div class="col-xs-12 center-xs mt-1">
+                                  <input hidden type="file" #imageUpload (change)="uploadImage($event)">
+                                  <button mat-raised-button color="primary" (click)="imageUpload.click()">Resmi Düzenle</button>
+                                </div>
+                              </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- <button mat-raised-button color="primary" [disabled]="personalForm.invalid">Kaydet</button> -->
+                <div class="row">
+                    <div class="col-xs-12">
+                      <div class="row between-xs" *ngIf="!isNewPersonal">
+                        <button mat-raised-button color="primary" (click)="onUpdate()" [disabled]="personalForm.invalid">Kaydet</button>
+                        <button mat-raised-button color="warn" style="margin-left: 10px;" (click)="onDelete()" [disabled]="personalForm.invalid">Sil</button>
+                      </div>
+                      <div class="row between-xs" *ngIf="isNewPersonal">
+                        <button mat-raised-button color="primary" (click)="onAdd()" [disabled]="personalForm.invalid">Kaydet</button>
+                      </div>
+                    </div>
+                  </div>
+            </form>
+
+        </div>
+    </mat-card-content>
+</mat-card>

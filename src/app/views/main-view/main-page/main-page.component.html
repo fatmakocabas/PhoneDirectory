@@ -1,0 +1,70 @@
+<div class="m-16">
+  <a routerLink='/'>
+    <img src="./assets/images/logo.png" style="width: 175px;" alt="Rehber">
+  </a>
+  <h2 class="mt-1 text-center" style="color: navy; font-family: Arial, sans-serif; font-weight: bold;">Müdürlük Dahili
+    Telefon Listesi</h2>
+</div>
+<div class="outer-container">
+  <ng-container *ngFor="let uniqueAddress of uniqueAddresses">
+    <div class="card-header">
+      <h2 >{{ uniqueAddress.physicalAdress }}</h2>
+    </div>
+    <div class="card-container">
+      <ng-container *ngFor="let department of getDepartmentsByAddress(uniqueAddress)">
+        <mat-card class="user-card p-0">
+          <mat-card-title class="mb-16">
+            <div class="card-title-text">
+              <div class="title">
+                <h2>{{ department.name }}</h2>
+                <h5 style="color: red; font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif">fax: {{ department.fax }}</h5>
+            </div>
+            </div>
+            <mat-divider></mat-divider>
+          </mat-card-title>
+          <mat-card-content>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>No</th>
+                  <th>Adı Soyadı</th>
+                  <th>Ünvanı</th>
+                  <th>Dahili</th>
+                </tr>
+              </thead>
+              <tbody>
+                <ng-container *ngIf="department.orderedPersons && department.orderedPersons.length > 0; else noPersons">
+                  <ng-container *ngFor="let person of department.orderedPersons; let i = index">
+                    <ng-container *ngIf="person.showSectionTitle">
+                      <tr>
+                        <td colspan="4" class="section-title">{{ person.section.name || '' }}</td>
+                      </tr>
+                    </ng-container>
+                    <tr>
+                      <td>{{ i + 1 }}</td>
+                      <td>{{ person.firstName }} {{ person.lastName }}</td>
+                      <td>{{ person.title }}</td>
+                      <td>{{ person.ext }}</td>
+                    </tr>
+                  </ng-container>
+                </ng-container>
+                <ng-template #noPersons>
+                  <tr>
+                    <td colspan="4">Bu bölümde personel bulunmamaktadır.</td>
+                  </tr>
+                </ng-template>
+              </tbody>
+            </table>
+            
+          </mat-card-content>
+        </mat-card>
+      </ng-container>
+    </div>
+  </ng-container>
+</div>
+
+
+<div class="app-footer">
+  <p class="footer-note" style="float: right; margin-right: 20px; color: #888888;">Güncellemeler için lütfen 3458 dahiliye erişiniz yada teknikdestek.sariyer.bel.tr mail adresine mail attınız!</p>
+  <p class="created-by-text">Created by Yazılım Birimi</p>
+</div>

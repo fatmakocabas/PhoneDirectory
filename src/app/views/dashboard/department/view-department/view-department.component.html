@@ -1,0 +1,92 @@
+<mat-card class="p-0">
+    <mat-card-title class="align-items-center">
+        <div class="card-title-container ">
+            <div class="card-title-text ">Müdürlük</div>
+            <div class="back-icon"> 
+            <a routerLink="/admin/personals" color="primary" mat-raised-button class="back-button">
+                <mat-icon>chevron_left</mat-icon>
+            </a>
+        </div>
+        </div>
+     
+        <mat-divider></mat-divider>
+      
+    </mat-card-title>
+    <mat-card-content>
+        <div *ngIf="departmentForm">
+            <form [formGroup]="departmentForm">
+                <div fxLayout="row wrap">
+                    <div fxFlex="100" fxFlex.gt-xs="50" class="pr-16">
+                        <div class="pb-16">
+                            <mat-form-field class="full-width">
+                                <input matInput name="name" formControlName="name" placeholder="Müdürlük Adı"
+                                    value="">
+                            </mat-form-field>
+                            <small
+                                *ngIf="departmentForm.controls['name'].hasError('required') && departmentForm.controls['name'].touched"
+                                class="form-error-msg">Müdürlük Adı zorunlu </small>
+                        </div>
+                        <div class="pb-16">
+                            <mat-form-field class="full-width">
+                                <input matInput name="description" formControlName="description" placeholder="Açıklama"
+                                    value="">
+                            </mat-form-field>
+                            
+                        </div>
+                        <div class="pb-16">
+                            <mat-form-field class="full-width">
+                                <input matInput name="section" formControlName="section" placeholder="Birimler"
+                                    value="">
+                            </mat-form-field>
+                            
+                        </div>   
+                        <div class="pb-16">
+                            <div class="flex-container">                             
+                                <mat-form-field  class="flex-item" appearance="outline">
+                                    <mat-select name="address" formControlName="address"  placeholder="Kat" [required]="true">
+                                        <mat-option *ngFor="let address of addressList" [value]="address.id">
+                                            {{ address.floor}}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                                <mat-form-field class="flex-item">
+                                  <input matInput name="order" formControlName="order" placeholder="Sıra" value="">
+                                </mat-form-field>
+                              </div>
+                        </div>
+                        
+                    </div>
+
+                    <div fxFlex="100" fxFlex.gt-xs="50">
+                        <!-- <div class="pb-16" style="margin: 100px;">
+                           
+                                <div class="image-container">
+                                  <img [src]="displayProfileImageUrl" >
+                                </div>
+                             
+                              <div class="row" style="margin: 10px 35px;" *ngIf="!isNewPersonal">
+                                <div class="col-xs-12 center-xs mt-1">
+                                  <input hidden type="file" #imageUpload (change)="uploadImage($event)">
+                                  <button mat-raised-button color="primary" (click)="imageUpload.click()">Resmi Düzenle</button>
+                                </div>
+                              </div>
+                        </div> -->
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-12">
+                      <div class="row between-xs" *ngIf="!isNewPersonal">
+                        <button mat-raised-button color="primary" (click)="onUpdate()" [disabled]="departmentForm.invalid">Kaydet</button>
+                        <button mat-raised-button color="warn" style="margin-left: 10px;" (click)="onDelete()" [disabled]="departmentForm.invalid">Sil</button>
+                      </div>
+                      <div class="row between-xs" *ngIf="isNewPersonal">
+                        <button mat-raised-button color="primary" (click)="onAdd()" [disabled]="departmentForm.invalid">Kaydet</button>
+                      </div>
+                    </div>
+                  </div>
+            </form>
+
+        </div>
+    </mat-card-content>
+</mat-card>
