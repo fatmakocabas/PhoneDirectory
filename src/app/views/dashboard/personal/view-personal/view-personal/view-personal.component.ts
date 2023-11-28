@@ -12,7 +12,7 @@ import { MatSnackBar } from "@angular/material/snack-bar";
 import { ActivatedRoute, Router } from "@angular/router";
 import { PersonalRequest } from "app/shared/models/PersonalRequest";
 import { Department } from "app/shared/models/department.model";
-import { DepartmentSection } from "app/shared/models/departmentSection.model";
+import { Section } from "app/shared/models/departmentSection.model";
 import { Personal } from "app/shared/models/personal.model";
 import { DepartmentService } from "app/shared/services/department.service";
 import { PersonalService } from "app/shared/services/personal.service";
@@ -57,8 +57,8 @@ export class ViewPersonalComponent implements OnInit {
     
   };
   deparmentList: Department[] = [];
-  sectionList: DepartmentSection[] = [];
-  sectionListByDepartment: DepartmentSection[] = [];
+  sectionList:Section[] = [];
+  sectionListByDepartment: Section[] = [];
   isNewPersonal = false;
   header = "";
   displayProfileImageUrl = "";
@@ -178,7 +178,7 @@ export class ViewPersonalComponent implements OnInit {
       ext: controls["ext"].value,
       title: controls["title"].value,
       order:controls["order"].value,
-      sectionId:controls["section"].value,
+      departmentSectionId:controls["section"].value,
     }
    
     this.personalService
@@ -238,7 +238,7 @@ export class ViewPersonalComponent implements OnInit {
       ext: controls["ext"].value,
       title: controls["title"].value,
       order:controls["order"].value,
-      sectionId:controls["section"].value,
+      departmentSectionId:controls["section"].value,
     }
    
     this.personalService.addPersonal(personalRequest)

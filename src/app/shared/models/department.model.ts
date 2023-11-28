@@ -1,5 +1,5 @@
 import { Address } from "./address.model";
-import { DepartmentSection } from "./departmentSection.model";
+import { Section } from "./departmentSection.model";
 
 export interface Department{
   id: string,
@@ -7,7 +7,7 @@ export interface Department{
   description?: string,
   fax?:string,
   order?:number,
-  sectionList?: DepartmentSection[] ; 
+  sectionList?: Section[] ; 
   addressId: string,
   address: Address 
 }
