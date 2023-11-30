@@ -8,7 +8,7 @@ export interface PersonalRequest {
   ext: string,
   title: string,
   departmentId: string,
-  departmentSectionId:string,
+  sectionId:string,
   order:number,
  
 }

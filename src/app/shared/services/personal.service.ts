@@ -40,10 +40,13 @@ export class PersonalService {
     return this.http.put<Personal>(url + personalId, personalRequest);
   }
   addPersonal( personalRequest: PersonalRequest): Observable<Personal>{
-    var url = API_URL + "/personals/";
-    return this.http.post<Personal>(url+'add',personalRequest);
+    var url = API_URL + "/personals/add";
+    return this.http.post<Personal>(url,personalRequest);
   }
-
+  deletePersonal(personalId: string): Observable<Personal>{
+    var url = API_URL+'/delete/';
+    return this.http.delete<Personal>(url+personalId);
+  }
 
   uploadImage(personalId: string, file: File): Observable<any> {
     const formData = new FormData();

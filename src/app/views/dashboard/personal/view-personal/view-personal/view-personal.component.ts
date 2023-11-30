@@ -12,7 +12,7 @@ import { MatSnackBar } from "@angular/material/snack-bar";
 import { ActivatedRoute, Router } from "@angular/router";
 import { PersonalRequest } from "app/shared/models/PersonalRequest";
 import { Department } from "app/shared/models/department.model";
-import { Section } from "app/shared/models/departmentSection.model";
+import { DepartmentSection } from "app/shared/models/departmentSection.model";
 import { Personal } from "app/shared/models/personal.model";
 import { DepartmentService } from "app/shared/services/department.service";
 import { PersonalService } from "app/shared/services/personal.service";
@@ -51,14 +51,14 @@ export class ViewPersonalComponent implements OnInit {
         floor: 0,
       },
     },
-    sectionId:"",
-    
-    
-    
+    sectionId: "",
+
+
+
   };
   deparmentList: Department[] = [];
-  sectionList:Section[] = [];
-  sectionListByDepartment: Section[] = [];
+  sectionList: DepartmentSection[] = [];
+  sectionListByDepartment: DepartmentSection[] = [];
   isNewPersonal = false;
   header = "";
   displayProfileImageUrl = "";
@@ -69,7 +69,7 @@ export class ViewPersonalComponent implements OnInit {
     private departmentService: DepartmentService,
     private readonly route: ActivatedRoute,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.loading = true;
@@ -91,10 +91,10 @@ export class ViewPersonalComponent implements OnInit {
           (success) => {
             this.personal = success;
             this.initForm(this.personal);
-             this.setImage();
+            this.setImage();
           },
           (error) => {
-              this.setImage();
+            this.setImage();
           }
         );
       }
@@ -114,10 +114,10 @@ export class ViewPersonalComponent implements OnInit {
       order: [personal?.order || null],
       department: [personal?.departmentId || null],
     });
-  
+
     // Eğer personal nesnesi varsa ve sectionId doluysa, bu sectionId'ye karşılık gelen section'ı seçili hale getir
     if (personal && personal.sectionId) {
-      
+
       this.sectionListByDepartment = this.sectionList.filter(section => section.departmentId === personal.departmentId);
       this.personalForm.get('section').setValue(personal.sectionId);
       this.sectionListByDepartment.unshift(null);
@@ -125,19 +125,19 @@ export class ViewPersonalComponent implements OnInit {
       this.sectionListByDepartment = this.sectionList.filter(section => section.departmentId === personal.departmentId);
       this.sectionListByDepartment.unshift(null);
     }
-  
+
     // department değişikliğinde sectionListByDepartment'in güncellenmesi için bir listener ekleyin
     this.personalForm.get('department')?.valueChanges.subscribe(selectedDepartmentId => {
       this.sectionListByDepartment = this.sectionList.filter(section => section.departmentId === selectedDepartmentId);
       this.sectionListByDepartment.unshift(null);
     });
-  
+
     console.log("personelForm", this.personalForm);
   }
   loadDepartments() {
     this.departmentService.allDepartments().subscribe(
       (success) => {
-       
+
         this.deparmentList = success;
       },
       (error) => {
@@ -149,7 +149,7 @@ export class ViewPersonalComponent implements OnInit {
   loadSections() {
     this.departmentService.allSections().subscribe(
       (success) => {
-       
+
         this.sectionList = success;
       },
       (error) => {
@@ -159,16 +159,16 @@ export class ViewPersonalComponent implements OnInit {
   }
 
   onDepartmentChange(event: MatSelectChange) {
-  const selectedDepartmentId = event.value;
-  this.sectionListByDepartment = this.sectionList.filter(section => section.departmentId === selectedDepartmentId);
-  this.sectionListByDepartment.unshift(null);
+    const selectedDepartmentId = event.value;
+    this.sectionListByDepartment = this.sectionList.filter(section => section.departmentId === selectedDepartmentId);
+    this.sectionListByDepartment.unshift(null);
   }
 
   onUpdate() {
     this.console.log("updategirdi");
-   
+
     const controls = this.personalForm.controls;
-    const personalRequest : PersonalRequest ={
+    const personalRequest: PersonalRequest = {
       firstName: controls["firstname"].value,
       lastName: controls["lastname"].value,
       dateOfBirth: controls["dateOfBirth"].value,
@@ -177,10 +177,10 @@ export class ViewPersonalComponent implements OnInit {
       departmentId: controls["department"].value,
       ext: controls["ext"].value,
       title: controls["title"].value,
-      order:controls["order"].value,
-      departmentSectionId:controls["section"].value,
+      order: controls["order"].value,
+      sectionId: controls["section"].value,
     }
-   
+
     this.personalService
       .updatePersonal(this.personal.id, personalRequest)
       .subscribe(
@@ -204,31 +204,33 @@ export class ViewPersonalComponent implements OnInit {
 
   onDelete() {
     this.console.log("deletegirdi");
-    // this.studentService.deleteStudent(this.student.id).subscribe(
-    //   (success) => {
-    //     this.snackbar.open('Öğrenci başarılı bir şekilde silindi!',undefined,{
-    //       duration: 2000
-    //     })
-
-    //     setTimeout(()=>{
-    //       this.router.navigateByUrl('students');
-    //     },2000)
-
-    //   },
-    //   (error) => {
-    //     this.snackbar.open('Öğrenci silinmedi!',undefined,{
-    //       duration: 2000
-    //     })
-    //   }
-    // )
+    debugger;
+    this.personalService
+      .deletePersonal(this.personalId)
+      .subscribe(
+        (success) => {
+          this.snackbar.open(
+            "Personel başarılı bir şekilde silindi!",
+            undefined,
+            {
+              duration: 2000,
+            }
+          );
+          this.router.navigateByUrl("admin/personals");
+        },
+        (error) => {
+          this.snackbar.open("Personel silinemedi!", undefined, {
+            duration: 2000,
+          });
+        }
+      );
   }
 
   onAdd() {
     this.console.log("addgirdi");
-  
-    
+
     const controls = this.personalForm.controls;
-    const personalRequest : PersonalRequest ={
+    const personalRequest: PersonalRequest = {
       firstName: controls["firstname"].value,
       lastName: controls["lastname"].value,
       dateOfBirth: controls["dateOfBirth"].value,
@@ -237,28 +239,28 @@ export class ViewPersonalComponent implements OnInit {
       departmentId: controls["department"].value,
       ext: controls["ext"].value,
       title: controls["title"].value,
-      order:controls["order"].value,
-      departmentSectionId:controls["section"].value,
+      order: controls["order"].value,
+      sectionId: controls["section"].value,
     }
-   
+
     this.personalService.addPersonal(personalRequest)
-    .subscribe(
-      (success) =>{
-           this.snackbar.open('Personel başarılı bir şekilde eklendi!',undefined,{
-             duration: 2000
-           })
-           setTimeout(()=>{
+      .subscribe(
+        (success) => {
+          this.snackbar.open('Personel başarılı bir şekilde eklendi!', undefined, {
+            duration: 2000
+          })
+          setTimeout(() => {
             this.router.navigateByUrl(`admin/personals/${success.id}`);
-          },2000)
+          }, 2000)
 
-      },
-      (error) =>{
-         this.snackbar.open('Personel eklenemedi!',undefined,{
-           duration: 2000
-         })
+        },
+        (error) => {
+          this.snackbar.open('Personel eklenemedi!', undefined, {
+            duration: 2000
+          })
 
-     }
-    )
+        }
+      )
   }
   setImage() {
     debugger
@@ -270,23 +272,21 @@ export class ViewPersonalComponent implements OnInit {
       this.displayProfileImageUrl = "/assets/images/avatars/001-man.svg";
     }
   }
-  uploadImage(event :any)
-  {
-   
-    if(this.personalId)
-    {
-      const file :File = event.target.files[0];
-      this.personalService.uploadImage(this.personal.id,file).subscribe(
-        (success) =>{
+  uploadImage(event: any) {
+
+    if (this.personalId) {
+      const file: File = event.target.files[0];
+      this.personalService.uploadImage(this.personal.id, file).subscribe(
+        (success) => {
 
           this.personal.profileImageUrl = success;
           this.setImage();
 
-          this.snackbar.open('Personel resmi güncellendi!',undefined,{
+          this.snackbar.open('Personel resmi güncellendi!', undefined, {
             duration: 2000
           })
         },
-        (error) =>{
+        (error) => {
 
         },
       )

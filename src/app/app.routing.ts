@@ -22,7 +22,7 @@ export const rootRouterConfig: Routes = [
       {
         path: 'main',
         loadChildren: () => import('./views/main-view/main-view.module').then(m => m.MainViewModule),
-        data: { title: 'Session'}
+        data: { title: 'REHBER'}
       }
     ]
   },
@@ -33,7 +33,7 @@ export const rootRouterConfig: Routes = [
       {
         path: 'sessions',
         loadChildren: () => import('./views/sessions/sessions.module').then(m => m.SessionsModule),
-        data: { title: 'Session'}
+        data: { title: 'REHBER'}
       }
     ]
   },
@@ -45,17 +45,17 @@ export const rootRouterConfig: Routes = [
       {
         path: '',
         loadChildren: () => import('./views/dashboard/dashboard.module').then(m => m.DashboardModule),
-        data: { title: 'Dashboard', breadcrumb: 'DASHBOARD'}
+        data: { title: 'REHBER', breadcrumb: 'DASHBOARD'}
       },
       {
         path: 'others',
         loadChildren: () => import('./views/others/others.module').then(m => m.OthersModule),
-        data: { title: 'Others', breadcrumb: 'OTHERS'}
+        data: { title: 'REHBER', breadcrumb: 'OTHERS'}
       },
       {
         path: 'forms',
         loadChildren: () => import('./views/forms/forms.module').then(m => m.AppFormsModule),
-        data: { title: 'Forms', breadcrumb: 'FORMS'}
+        data: { title: 'REHBER', breadcrumb: 'FORMS'}
       },
       
       {

@@ -1,6 +1,6 @@
 import { Department } from "./department.model";
 
-export interface Section{
+export interface DepartmentSection{
   id: string,
   name:string,
   description: string,  

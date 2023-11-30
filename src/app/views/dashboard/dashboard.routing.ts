@@ -20,7 +20,7 @@ export const DashboardRoutes: Routes = [
   {
     path: "personals",
     component: PersonalsComponent,
-    data: { title: 'Personel Listesi', breadcrumb: 'Personel Listesi'}
+    data: { title: 'REHBER', breadcrumb: 'Personel Listesi'}
   },
   {
     path:'personals/:id',
@@ -30,7 +30,7 @@ export const DashboardRoutes: Routes = [
   {
     path: "departments",
     component: DepartmentsComponent,
-    data: { title: 'Müdürlük Listesi', breadcrumb: 'Müdürlük Listesi'}
+    data: { title: 'REHBER', breadcrumb: 'Müdürlük Listesi'}
   },
   {
     path:'departments/:id',

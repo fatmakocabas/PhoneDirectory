@@ -8,7 +8,7 @@ import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { Personal } from "../models/personal.model";
 import { Department } from "../models/department.model";
-import { Section } from "../models/departmentSection.model";
+import { DepartmentSection } from "../models/departmentSection.model";
 import { DepartmentRequest } from "../models/DepartmentRequest";
 const API_URL = "api/department";
 @Injectable()
@@ -19,9 +19,9 @@ export class DepartmentService {
     var url = API_URL + "/getAllDepartments";
     return this.http.get<Department[]>(url);
   }
-  allSections(): Observable<Section[]> {
+  allSections(): Observable<DepartmentSection[]> {
     var url = API_URL + "/getAllSections";
-    return this.http.get<Section[]>(url);
+    return this.http.get<DepartmentSection[]>(url);
   }
 
   getDepartment(departmentId: string | null): Observable<Department> {

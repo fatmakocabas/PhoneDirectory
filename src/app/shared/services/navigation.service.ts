@@ -30,85 +30,91 @@ interface IBadge {
 export class NavigationService {
   iconMenu: IMenuItem[] = [
     // {
+    //   name: 'Müdürlükler',
+    //   state: 'admin/departments',
+    //   type: 'link',
+    //   icon: 'grain',
+    // },
+    // {
     //   name: 'DASHBOARD',
     //   state: 'admin/dashboard/analytics',
     //   type: 'link',
     //   icon: 'dashboard',
     // },
     {
+      name: 'Müdürlükler',
+      state: 'admin/departments',
+      type: 'link',
+      icon: 'library_books',
+    },
+    {
       name: 'Personel Listesi',
       state: 'admin/personals',
       type: 'link',
-      icon: 'personel',
+      icon: 'person',
     },
-    {
-      name: 'Ana Veriler',
-      type: 'separator'
-    },
-    {
-      name: 'Müdürlük',
-      state: 'admin/departments',
-      type: 'link',
-      icon: 'description',
-    },
-    {
-      name: 'EDITOR',
-      state: 'admin/forms/editor',
-      type: 'link',
-      icon: 'subject',
-    },
-    {
-      name: 'UPLOAD',
-      state: 'admin/forms/upload',
-      type: 'link',
-      icon: 'upload',
-    },
-    {
-      name: 'WIZARD',
-      state: 'admin/forms/wizard',
-      type: 'link',
-      icon: 'grain',
-    },
-    {
-      name: 'PAGES',
-      type: 'separator'
-    },
-    {
-      name: 'SESSIONS',
-      type: 'dropDown',
-      tooltip: 'Pages',
-      icon: 'view_carousel',
-      sub: [
-        { name: 'SIGNUP', state: 'sessions/signup' },
-        { name: 'SIGNIN', state: 'sessions/signin' },
-        { name: 'NOTFOUND', state: 'sessions/404' },
-      ]
-    },
-    {
-      name: 'OTHERS',
-      type: 'dropDown',
-      tooltip: 'Others',
-      icon: 'blur_on',
-      sub: [
-        { name: 'GALLERY', state: 'admin/others/gallery' },
-        { name: 'PRICINGS', state: 'admin/others/pricing' },
-        { name: 'USERS', state: 'admin/others/users' },
-        { name: 'BLANK', state: 'admin/others/blank' }
-      ]
-    },
-    {
-      name: 'Pro',
-      type: 'extLink',
-      icon: 'upgrade',
-      state: 'http://matx-angular.ui-lib.com/'
-    },
-    {
-      name: 'DOC',
-      type: 'extLink',
-      tooltip: 'Documentation',
-      icon: 'library_books',
-      state: 'http://demos.ui-lib.com/matx-doc/'
-    }
+    // {
+    //   name: 'Ana Veriler',
+    //   type: 'separator'
+    // },
+    // {
+    //   name: 'EDITOR',
+    //   state: 'admin/forms/editor',
+    //   type: 'link',
+    //   icon: 'subject',
+    // },
+    // {
+    //   name: 'UPLOAD',
+    //   state: 'admin/forms/upload',
+    //   type: 'link',
+    //   icon: 'upload',
+    // },
+    // {
+    //   name: 'WIZARD',
+    //   state: 'admin/forms/wizard',
+    //   type: 'link',
+    //   icon: 'grain',
+    // },
+    // {
+    //   name: 'PAGES',
+    //   type: 'separator'
+    // },
+    // {
+    //   name: 'SESSIONS',
+    //   type: 'dropDown',
+    //   tooltip: 'Pages',
+    //   icon: 'view_carousel',
+    //   sub: [
+    //     { name: 'SIGNUP', state: 'sessions/signup' },
+    //     { name: 'SIGNIN', state: 'sessions/signin' },
+    //     { name: 'NOTFOUND', state: 'sessions/404' },
+    //   ]
+    // },
+    // {
+    //   name: 'OTHERS',
+    //   type: 'dropDown',
+    //   tooltip: 'Others',
+    //   icon: 'blur_on',
+    //   sub: [
+    //     { name: 'GALLERY', state: 'admin/others/gallery' },
+    //     { name: 'PRICINGS', state: 'admin/others/pricing' },
+    //     { name: 'USERS', state: 'admin/others/users' },
+    //     { name: 'BLANK', state: 'admin/others/blank' }
+    //   ]
+    // },
+    // {
+    //   name: 'Pro',
+    //   type: 'extLink',
+    //   icon: 'upgrade',
+    //   state: 'http://matx-angular.ui-lib.com/'
+    // },
+    // {
+    //   name: 'DOC',
+    //   type: 'extLink',
+    //   tooltip: 'Documentation',
+    //   icon: 'library_books',
+    //   state: 'http://demos.ui-lib.com/matx-doc/'
+    // }
   ];
 
   // Icon menu TITLE at the very top of navigation.

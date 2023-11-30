@@ -1,5 +1,5 @@
 import { Department } from "./department.model";
-import { Section } from "./departmentSection.model";
+import { DepartmentSection } from "./departmentSection.model";
 
 export interface Personal {
   id: string,
@@ -14,6 +14,6 @@ export interface Personal {
   departmentId: string,
   department: Department,
   sectionId?:string,
-  section?:Section,
+  section?:DepartmentSection,
   order?:number, 
 }
