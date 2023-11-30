@@ -34,12 +34,21 @@
                             
                         </div>
                         <div class="pb-16">
-                            <mat-form-field class="full-width">
-                                <input matInput name="section" formControlName="section" placeholder="Birimler"
-                                    value="">
+                            <div class="flex-container">  
+                            <mat-form-field class="flex-item">
+                              <mat-label>Birimler</mat-label>
+                              <input matInput placeholder="Birim ekle" formControlName="section" [matAutocomplete]="auto">
+                              <mat-autocomplete #auto="matAutocomplete">
+                                <mat-option *ngFor="let section of departmentForm.get('sectionList').value" [value]="section">
+                                  {{ section.name }}
+                                </mat-option>
+                              </mat-autocomplete>
                             </mat-form-field>
-                            
-                        </div>   
+                            <button mat-icon-button (click)="addSection()">
+                                <mat-icon>add</mat-icon>
+                              </button>
+                        </div>
+                          </div>  
                         <div class="pb-16">
                             <div class="flex-container">                             
                                 <mat-form-field  class="flex-item" appearance="outline">

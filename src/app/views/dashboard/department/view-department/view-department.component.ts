@@ -80,18 +80,16 @@ export class ViewDepartmentComponent implements OnInit {
   }
 
   initForm(department: Department) {
-    debugger;
     this.departmentForm = this.fb.group({
       id: [department?.id || null],
       name: [department?.name || "", Validators.required],
       description: [department?.description || "", Validators.required],
-      order: [department?.order || "", [Validators.required, Validators.email]],
+      order: [department?.order || "", Validators.required],
       fax: [department?.fax || null],    
-      section: [department?.sectionList || null],
+      section: [''], // Bu alana kullanıcının gireceği yeni bölümleri eklemek için bir giriş alanı ekledik
+      sectionList: [department?.sectionList || []],
       address: [department?.addressId || null],
     });
-  
-    console.log("departmentForm", this.departmentForm);
   }
 
   loadAddresses() {
@@ -105,7 +103,18 @@ export class ViewDepartmentComponent implements OnInit {
     );
   }
 
-  
+  addSection() {
+    const newSectionName  = this.departmentForm.value.section;
+  debugger
+    // Eğer yeni bölüm daha önce eklenmemişse, listeye ekle
+    if (newSectionName && !this.departmentForm.value.sectionList.some(section => section.name === newSectionName)) {
+      const newSection = { name: newSectionName };
+      const updatedSectionList = [...this.departmentForm.value.sectionList, newSection];
+      this.departmentForm.patchValue({ sectionList: updatedSectionList });
+    }
+    // Giriş alanını temizle
+    this.departmentForm.patchValue({ section: '' });
+  }
  
   onUpdate() {
     this.console.log("updategirdi");
@@ -117,7 +126,7 @@ export class ViewDepartmentComponent implements OnInit {
       fax: controls["fax"].value,
       addressId: controls["address"].value,
       order:controls["order"].value,
-      section:controls["section"].value,
+      section:controls["sectionList"].value,
     }
    
     this.deparmentService
