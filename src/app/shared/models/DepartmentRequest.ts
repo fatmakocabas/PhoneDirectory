@@ -1,5 +1,6 @@
 
 export interface DepartmentRequest {
+  id?:string,
   name: string,
   description?: string,
   fax?: string, 

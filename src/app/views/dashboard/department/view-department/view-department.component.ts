@@ -105,7 +105,7 @@ export class ViewDepartmentComponent implements OnInit {
 
   addSection() {
     const newSectionName  = this.departmentForm.value.section;
-  debugger
+  
     // Eğer yeni bölüm daha önce eklenmemişse, listeye ekle
     if (newSectionName && !this.departmentForm.value.sectionList.some(section => section.name === newSectionName)) {
       const newSection = { name: newSectionName };
@@ -121,6 +121,7 @@ export class ViewDepartmentComponent implements OnInit {
    
     const controls = this.departmentForm.controls;
     const departmentRequest : DepartmentRequest ={
+      id: this.departmentId,
       name: controls["name"].value,
       description: controls["description"].value,
       fax: controls["fax"].value,
@@ -140,7 +141,7 @@ export class ViewDepartmentComponent implements OnInit {
               duration: 2000,
             }
           );
-          this.router.navigateByUrl("admin/personals");
+          this.router.navigateByUrl("admin/departments");
         },
         (error) => {
           this.snackbar.open("Müdürlük güncellenemedi!", undefined, {
@@ -173,7 +174,7 @@ export class ViewDepartmentComponent implements OnInit {
 
   onAdd() {
     this.console.log("addgirdi");
-  
+    debugger;
     
     const controls = this.departmentForm.controls;
     const departmentRequest : DepartmentRequest ={
@@ -182,7 +183,7 @@ export class ViewDepartmentComponent implements OnInit {
       fax: controls["fax"].value,
       addressId: controls["address"].value,
       order:controls["order"].value,
-      section:controls["section"].value,
+      section:controls["sectionList"].value,
     }
    
     this.deparmentService.addDepartment(departmentRequest)
@@ -192,7 +193,7 @@ export class ViewDepartmentComponent implements OnInit {
              duration: 2000
            })
            setTimeout(()=>{
-            this.router.navigateByUrl(`admin/personals/${success.id}`);
+            this.router.navigateByUrl(`admin/departments/${success.id}`);
           },2000)
 
       },

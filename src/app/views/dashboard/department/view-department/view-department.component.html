@@ -3,7 +3,7 @@
         <div class="card-title-container ">
             <div class="card-title-text ">Müdürlük</div>
             <div class="back-icon"> 
-            <a routerLink="/admin/personals" color="primary" mat-raised-button class="back-button">
+            <a routerLink="/admin/departments" color="primary" mat-raised-button class="back-button">
                 <mat-icon>chevron_left</mat-icon>
             </a>
         </div>
@@ -35,6 +35,9 @@
                         </div>
                         <div class="pb-16">
                             <div class="flex-container">  
+                              <mat-form-field class="flex-item">
+                                <input matInput name="fax" formControlName="fax" placeholder="Fax" value="">
+                              </mat-form-field>
                             <mat-form-field class="flex-item">
                               <mat-label>Birimler</mat-label>
                               <input matInput placeholder="Birim ekle" formControlName="section" [matAutocomplete]="auto">
@@ -47,6 +50,7 @@
                             <button mat-icon-button (click)="addSection()">
                                 <mat-icon>add</mat-icon>
                               </button>
+                            
                         </div>
                           </div>  
                         <div class="pb-16">
@@ -85,11 +89,11 @@
 
                 <div class="row">
                     <div class="col-xs-12">
-                      <div class="row between-xs" *ngIf="!isNewPersonal">
+                      <div class="row between-xs" *ngIf="!isNewDepartment">
                         <button mat-raised-button color="primary" (click)="onUpdate()" [disabled]="departmentForm.invalid">Kaydet</button>
                         <button mat-raised-button color="warn" style="margin-left: 10px;" (click)="onDelete()" [disabled]="departmentForm.invalid">Sil</button>
                       </div>
-                      <div class="row between-xs" *ngIf="isNewPersonal">
+                      <div class="row between-xs" *ngIf="isNewDepartment">
                         <button mat-raised-button color="primary" (click)="onAdd()" [disabled]="departmentForm.invalid">Kaydet</button>
                       </div>
                     </div>
