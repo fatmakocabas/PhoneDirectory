@@ -44,3 +44,20 @@ mat-divider {
     border: none;
     background-color: #ebe5e5;
 }
+.custom-mat-icon-button {
+  margin-left: auto;
+  margin-top: 0px;
+  display: flex;
+  color: rgb(197, 11, 11); 
+  align-items: center;
+  height: 20px;
+  width: 20px;
+}
+.custom-mat-icon-button mat-icon {
+  font-size: 14px; /* İstenen boyutu buradan ayarlayabilirsiniz */
+}
+.section-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
