@@ -7,6 +7,7 @@ import {
   UntypedFormGroup,
   Validators,
 } from "@angular/forms";
+import { MatAutocompleteSelectedEvent } from "@angular/material/autocomplete";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { ActivatedRoute, Router } from "@angular/router";
 import { DepartmentRequest } from "app/shared/models/DepartmentRequest";
@@ -115,10 +116,16 @@ export class ViewDepartmentComponent implements OnInit {
     // Giriş alanını temizle
     this.departmentForm.patchValue({ section: '' });
   }
- 
+
+  removeSection(section: any) {
+    const updatedSectionList = this.departmentForm.value.sectionList.filter(s => s !== section);
+    this.departmentForm.patchValue({ sectionList: updatedSectionList });
+  }
+  onSectionSelected(event: MatAutocompleteSelectedEvent) {
+    const selectedSection = event.option.value;
+    this.departmentForm.patchValue({ section: selectedSection.name });
+  }
   onUpdate() {
-    this.console.log("updategirdi");
-   
     const controls = this.departmentForm.controls;
     const departmentRequest : DepartmentRequest ={
       id: this.departmentId,
@@ -143,39 +150,43 @@ export class ViewDepartmentComponent implements OnInit {
           );
           this.router.navigateByUrl("admin/departments");
         },
-        (error) => {
-          this.snackbar.open("Müdürlük güncellenemedi!", undefined, {
-            duration: 2000,
-          });
+        (error) => {          
+          const regex = /foreignkey/i; // "FK_Personal_Section_SectionId"
+          if (error?.error && regex.test(error.error)) {
+           this.snackbar.open("Silmeye çalıştığınız birimde, bir veya daha fazla çalışan bu birime bağlıdır.", undefined, { duration: 2000 });
+          } else {
+            this.snackbar.open("Bir hata oluştu, lütfen tekrar deneyin.", undefined, { duration: 2000 });
+          }
         }
       );
   }
 
-  onDelete() {
-    this.console.log("deletegirdi");
-    // this.studentService.deleteStudent(this.student.id).subscribe(
-    //   (success) => {
-    //     this.snackbar.open('Öğrenci başarılı bir şekilde silindi!',undefined,{
-    //       duration: 2000
-    //     })
+  onDelete()
+  {
+    this.deparmentService.deleteDepartment(this.department.id).subscribe(
+      (success) => {
+        this.snackbar.open('Müdürlük başarılı bir şekilde silindi!',undefined,{
+          duration: 2000
+        })
 
-    //     setTimeout(()=>{
-    //       this.router.navigateByUrl('students');
-    //     },2000)
+        setTimeout(()=>{
+          this.router.navigateByUrl('admin/departments');
+        },2000)
 
-    //   },
-    //   (error) => {
-    //     this.snackbar.open('Öğrenci silinmedi!',undefined,{
-    //       duration: 2000
-    //     })
-    //   }
-    // )
+      },
+      (error) => {
+        this.console.log(error?.error);
+        const regex = /foreignKeyInPersonal/i;         
+        if (error?.error && regex.test(error.error)) {
+          this.snackbar.open("Silmeye çalıştığınız müdürlükte, bir veya daha fazla çalışan bu müdürlüğe bağlıdır.", undefined, { duration: 2000 });
+         } else {
+           this.snackbar.open("Bir hata oluştu, lütfen tekrar deneyin.", undefined, { duration: 2000 });
+         }
+      }
+    )
   }
 
   onAdd() {
-    this.console.log("addgirdi");
-    debugger;
-    
     const controls = this.departmentForm.controls;
     const departmentRequest : DepartmentRequest ={
       name: controls["name"].value,

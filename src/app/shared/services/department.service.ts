@@ -40,4 +40,7 @@ export class DepartmentService {
     var url = API_URL + "/departments/";
     return this.http.post<Department>(url + "add", departmentRequest);
   }
+  deleteDepartment(departmentId:string): Observable<Department>{
+    return this.http.delete<Department>(API_URL+'/departments/'+departmentId);
+  }
 }
