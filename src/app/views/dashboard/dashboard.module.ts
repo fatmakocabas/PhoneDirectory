@@ -13,6 +13,8 @@ import { ViewPersonalComponent } from './personal/view-personal/view-personal/vi
 import { ReactiveFormsModule } from '@angular/forms';
 import { DepartmentsComponent } from "./department/departments.component";
 import { ViewDepartmentComponent } from "./department/view-department/view-department.component";
+import { AddressesComponent } from "./address/addresses.component";
+import { ViewAddressComponent } from "./address/view-address/view-address.component";
 @NgModule({
   imports: [
     CommonModule,
@@ -26,7 +28,7 @@ import { ViewDepartmentComponent } from "./department/view-department/view-depar
     SharedPipesModule,
     RouterModule.forChild(DashboardRoutes)
   ],
-  declarations: [AnalyticsComponent,PersonalsComponent, ViewPersonalComponent,DepartmentsComponent,ViewDepartmentComponent],
+  declarations: [AnalyticsComponent,PersonalsComponent, ViewPersonalComponent,DepartmentsComponent,ViewDepartmentComponent,AddressesComponent,ViewAddressComponent],
   exports: []
 })
 export class DashboardModule {}

@@ -1,5 +1,6 @@
 export interface Address{
   id: string,
-  physicalAddress: string,
-  floor: number
+  physicalAdress: string,
+  floor: number,
+  order?:number,
 }

@@ -36,7 +36,7 @@ export class ViewDepartmentComponent implements OnInit {
       addressId: "",
       address: {
         id: "",
-        physicalAddress: "",
+        physicalAdress: "",
         floor: 0,
       },
     }

@@ -47,7 +47,7 @@ export class ViewPersonalComponent implements OnInit {
       addressId: "",
       address: {
         id: "",
-        physicalAddress: "",
+        physicalAdress: "",
         floor: 0,
       },
     },
@@ -216,7 +216,9 @@ export class ViewPersonalComponent implements OnInit {
               duration: 2000,
             }
           );
-          this.router.navigateByUrl("admin/personals");
+          setTimeout(() => {
+            this.router.navigateByUrl('admin/personals');
+          }, 2000)
         },
         (error) => {
           this.snackbar.open("Personel silinemedi!", undefined, {

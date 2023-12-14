@@ -44,8 +44,7 @@ export class PersonalService {
     return this.http.post<Personal>(url,personalRequest);
   }
   deletePersonal(personalId: string): Observable<Personal>{
-    var url = API_URL+'/delete/';
-    return this.http.delete<Personal>(url+personalId);
+    return this.http.delete<Personal>(API_URL+'/personals/'+personalId);
   }
 
   uploadImage(personalId: string, file: File): Observable<any> {

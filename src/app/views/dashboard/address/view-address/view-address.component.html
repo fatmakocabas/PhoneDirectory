@@ -1,0 +1,57 @@
+<mat-card class="p-0">
+  <mat-card-title class="align-items-center">
+    <div class="card-title-container ">
+      <div class="card-title-text ">Adresler</div>
+      <div class="back-icon">
+        <a routerLink="/admin/addresses" color="primary" mat-raised-button class="back-button">
+          <mat-icon>chevron_left</mat-icon>
+        </a>
+      </div>
+    </div>
+    <mat-divider></mat-divider>
+  </mat-card-title>
+
+  <mat-card-content>
+    <div *ngIf="addressForm">
+      <form [formGroup]="addressForm">
+        <div fxLayout="row wrap">
+          <div fxFlex="100" fxFlex.gt-xs="50" class="pr-16">
+            <div class="pb-16">
+              <mat-form-field class="full-width">
+                <input matInput name="physicalAdress" formControlName="physicalAdress" placeholder="Adı" value="">
+              </mat-form-field>
+              <small *ngIf="addressForm.controls['physicalAdress'].hasError('required') && addressForm.controls['physicalAdress'].touched"
+                class="form-error-msg">Adı</small>
+            </div>
+            <div class="pb-16">
+              <mat-form-field class="flex-item">
+                <input matInput name="floor" formControlName="floor" placeholder="Kat" value="">
+              </mat-form-field>
+            </div>
+            <div class="pb-16">
+              <mat-form-field class="flex-item">
+                <input matInput name="order" formControlName="order" placeholder="Sıra" value="">
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="row between-xs" *ngIf="!isNewAddress">
+              <button mat-raised-button color="primary" (click)="onUpdate()"
+                [disabled]="addressForm.invalid">Kaydet</button>
+              <button mat-raised-button color="warn" style="margin-left: 10px;" (click)="onDelete()"
+                [disabled]="addressForm.invalid">Sil</button>
+            </div>
+            <div class="row between-xs" *ngIf="isNewAddress">
+              <button mat-raised-button color="primary" (click)="onAdd()"
+                [disabled]="addressForm.invalid">Kaydet</button>
+            </div>
+          </div>
+        </div>
+      </form>
+
+    </div>
+  </mat-card-content>
+</mat-card>

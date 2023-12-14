@@ -10,36 +10,37 @@ import { ThemeService } from "app/shared/services/theme.service";
 import { MatTableDataSource } from "@angular/material/table";
 import { MatPaginator } from "@angular/material/paginator";
 import { MatSort } from "@angular/material/sort";
-import { Department } from "app/shared/models/department.model";
-import { DepartmentService } from "app/shared/services/department.service";
+import { Address } from "app/shared/models/address.model";
+import { AddressService } from "app/shared/services/address.service";
 
 @Component({
-  selector: "app-departments",
-  templateUrl: "./departments.component.html",
-  styleUrls: ["./departments.component.scss"],
+  selector: "app-addresses",
+  templateUrl: "./addresses.component.html",
+  styleUrls: ["./addresses.component.scss"],
   animations: matxAnimations
 })
-export class DepartmentsComponent implements OnInit, AfterViewInit {
+export class AddressesComponent implements OnInit, AfterViewInit {
   
-  departments:Department[]=[];
-  displayedColumns: string[] = ['name', 'description', 'order', 'address.name','action'];
-  dataSource:MatTableDataSource<Department> = new MatTableDataSource<Department>();
+  addresses:Address[]=[];
+  displayedColumns: string[] = ['physicalAdress', 'order', 'floor','action'];
+  dataSource:MatTableDataSource<Address> = new MatTableDataSource<Address>();
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   filterString = '';
 
-  constructor(private themeService: ThemeService, private departmentService: DepartmentService) {}
+  constructor(private themeService: ThemeService, private addressService: AddressService) {}
 
   ngAfterViewInit() {}
   ngOnInit() {
   
-    this.departmentService.allDepartments().subscribe(
+    this.addressService.allAddresses().subscribe(
       (success) =>{       
-        this.departments = success;
-        this.dataSource = new MatTableDataSource<Department>(this.departments);
+        this.addresses = success;
+        console.log("success:",success);
+        this.dataSource = new MatTableDataSource<Address>(this.addresses);
         this.dataSource.sortingDataAccessor = (item, property) => {
           switch(property) {
-            case 'address.name': return item.address.physicalAdress;
+            case 'physicalAdress': return item.physicalAdress;
             default: return property;
           }
         };

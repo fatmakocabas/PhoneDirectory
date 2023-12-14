@@ -4,6 +4,8 @@ import { PersonalsComponent } from "./personal/personals.component";
 import { ViewPersonalComponent } from "./personal/view-personal/view-personal/view-personal.component";
 import { DepartmentsComponent } from "./department/departments.component";
 import { ViewDepartmentComponent } from "./department/view-department/view-department.component";
+import { AddressesComponent } from "./address/addresses.component";
+import { ViewAddressComponent } from "./address/view-address/view-address.component";
 
 
 export const DashboardRoutes: Routes = [
@@ -36,5 +38,15 @@ export const DashboardRoutes: Routes = [
     path:'departments/:id',
     component:ViewDepartmentComponent,
     data: { title: 'Müdürlük', breadcrumb: 'Müdürlük'}
+  },
+  {
+    path: "addresses",
+    component: AddressesComponent,
+    data: { title: 'REHBER', breadcrumb: 'Adres Listesi'}
+  },
+  {
+    path:'addresses/:id',
+    component:ViewAddressComponent,
+    data: { title: 'Kat', breadcrumb: 'Kat'}
   }
 ];

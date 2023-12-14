@@ -29,12 +29,7 @@ interface IBadge {
 @Injectable()
 export class NavigationService {
   iconMenu: IMenuItem[] = [
-    // {
-    //   name: 'Müdürlükler',
-    //   state: 'admin/departments',
-    //   type: 'link',
-    //   icon: 'grain',
-    // },
+  
     // {
     //   name: 'DASHBOARD',
     //   state: 'admin/dashboard/analytics',
@@ -42,17 +37,24 @@ export class NavigationService {
     //   icon: 'dashboard',
     // },
     {
+      name: 'Personel Listesi',
+      state: 'admin/personals',
+      type: 'link',
+      icon: 'person',
+    },
+    {
       name: 'Müdürlükler',
       state: 'admin/departments',
       type: 'link',
       icon: 'library_books',
     },
     {
-      name: 'Personel Listesi',
-      state: 'admin/personals',
+      name: 'Adresler',
+      state: 'admin/addresses',
       type: 'link',
-      icon: 'person',
+      icon: 'subject',
     },
+   
     // {
     //   name: 'Ana Veriler',
     //   type: 'separator'
