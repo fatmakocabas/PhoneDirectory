@@ -10,6 +10,8 @@ import { DashboardRoutes } from "./dashboard.routing";
 import { AnalyticsComponent } from "./analytics/analytics.component";
 import { PersonalsComponent } from "./personal/personals.component";
 import { ViewPersonalComponent } from './personal/view-personal/view-personal/view-personal.component';
+import { UsersComponent } from "./user/users.component";
+import { ViewUserComponent } from './user/view-user/view-user/view-user.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { DepartmentsComponent } from "./department/departments.component";
 import { ViewDepartmentComponent } from "./department/view-department/view-department.component";
@@ -28,7 +30,7 @@ import { ViewAddressComponent } from "./address/view-address/view-address.compon
     SharedPipesModule,
     RouterModule.forChild(DashboardRoutes)
   ],
-  declarations: [AnalyticsComponent,PersonalsComponent, ViewPersonalComponent,DepartmentsComponent,ViewDepartmentComponent,AddressesComponent,ViewAddressComponent],
+  declarations: [AnalyticsComponent,PersonalsComponent, ViewPersonalComponent,UsersComponent, ViewUserComponent,DepartmentsComponent,ViewDepartmentComponent,AddressesComponent,ViewAddressComponent],
   exports: []
 })
 export class DashboardModule {}

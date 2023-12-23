@@ -25,7 +25,8 @@ const API_TOKEN_URL = `api/token`;
 export class JwtAuthService {
   token;
   isAuthenticated: Boolean;
-  user: User = {};
+  user: User = {}
+  
   user$ = (new BehaviorSubject<User>(this.user));
   signingIn: Boolean;
   return: string;

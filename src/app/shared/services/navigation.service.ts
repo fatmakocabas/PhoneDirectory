@@ -54,6 +54,12 @@ export class NavigationService {
       type: 'link',
       icon: 'subject',
     },
+    {
+      name: 'Kullanıcılar',
+      state: 'admin/users',
+      type: 'link',
+      icon: 'upload',
+    },
    
     // {
     //   name: 'Ana Veriler',

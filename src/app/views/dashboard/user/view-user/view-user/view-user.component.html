@@ -1,0 +1,74 @@
+<mat-card class="p-0">
+    <mat-card-title class="align-items-center">
+        <div class="card-title-container ">
+            <div class="card-title-text ">Kullanıcı</div>
+            <div class="back-icon">
+                <a routerLink="/admin/users" color="primary" mat-raised-button class="back-button">
+                    <mat-icon>chevron_left</mat-icon>
+                </a>
+            </div>
+        </div>
+        <mat-divider></mat-divider>
+    </mat-card-title>
+
+    <mat-card-content>
+        <div *ngIf="userForm">
+            <form [formGroup]="userForm">
+                <div fxLayout="row wrap">
+                    <div fxFlex="100" fxFlex.gt-xs="50" class="pr-16">
+                        <div class="pb-16">
+                            <mat-form-field class="full-width">
+                                <input matInput type="email" name="email" formControlName="email" placeholder="E-mail"
+                                    value="">
+                                <small
+                                    *ngIf="userForm.controls['email'].hasError('email') && userForm.controls['email'].touched"
+                                    class="form-error-msg"> Mail formatında değil </small>
+                            </mat-form-field>
+                        </div>
+                        <div class="pb-16">
+                            <mat-form-field class="full-width">
+                                <input matInput name="userName" formControlName="userName" placeholder="Kullanıcı Adı"
+                                    value="">
+                            </mat-form-field>
+                            <small
+                                *ngIf="userForm.controls['userName'].hasError('required') && userForm.controls['userName'].touched"
+                                class="form-error-msg"> Kullanıcı Adı Zorunlu </small>
+                        </div>
+                        <div class="pb-16">
+                            <mat-form-field class="full-width">
+                                <input matInput name="name" formControlName="name" placeholder="Adı" value="">
+                            </mat-form-field>
+                            <small
+                                *ngIf="userForm.controls['name'].hasError('required') && userForm.controls['name'].touched"
+                                class="form-error-msg"> Ad Zorunlu </small>
+                        </div>
+                        <div class="pb-16">
+                            <mat-form-field class="full-width">
+                                <input matInput name="surname" formControlName="surname" placeholder="Soyadı" value="">
+                            </mat-form-field>
+                            <small
+                                *ngIf="userForm.controls['surname'].hasError('required') && userForm.controls['surname'].touched"
+                                class="form-error-msg"> Soyadı Zorunlu </small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="row between-xs" *ngIf="!isNewUser">
+                            <button mat-raised-button color="primary" (click)="onUpdate()"
+                                [disabled]="userForm.invalid">Kaydet</button>
+                            <button mat-raised-button color="warn" style="margin-left: 10px;" (click)="onDelete()"
+                                [disabled]="userForm.invalid">Sil</button>
+                        </div>
+                        <div class="row between-xs" *ngIf="isNewUser">
+                            <button mat-raised-button color="primary" (click)="onAdd()"
+                                [disabled]="userForm.invalid">Kaydet</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </mat-card-content>
+</mat-card>

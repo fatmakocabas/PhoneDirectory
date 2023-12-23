@@ -2,6 +2,8 @@ import { Routes } from "@angular/router";
 import { AnalyticsComponent } from "./analytics/analytics.component";
 import { PersonalsComponent } from "./personal/personals.component";
 import { ViewPersonalComponent } from "./personal/view-personal/view-personal/view-personal.component";
+import { UsersComponent } from "./user/users.component";
+import { ViewUserComponent } from "./user/view-user/view-user/view-user.component";
 import { DepartmentsComponent } from "./department/departments.component";
 import { ViewDepartmentComponent } from "./department/view-department/view-department.component";
 import { AddressesComponent } from "./address/addresses.component";
@@ -28,6 +30,16 @@ export const DashboardRoutes: Routes = [
     path:'personals/:id',
     component:ViewPersonalComponent,
     data: { title: 'Personel', breadcrumb: 'Personel'}
+  },
+  {
+    path: "users",
+    component: UsersComponent,
+    data: { title: 'REHBER', breadcrumb: 'Kullanıcı Listesi'}
+  },
+  {
+    path:'users/:id',
+    component:ViewUserComponent,
+    data: { title: 'User', breadcrumb: 'Kullanıcı'}
   },
   {
     path: "departments",

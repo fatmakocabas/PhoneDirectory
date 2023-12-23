@@ -14,6 +14,7 @@ import { SharedComponentsModule } from './components/shared-components.module';
 import { SharedPipesModule } from './pipes/shared-pipes.module';
 import { SharedDirectivesModule } from './directives/shared-directives.module';
 import { PersonalService } from './services/personal.service';
+import { UserService } from './services/user.service';
 import { DepartmentService } from './services/department.service';
 import { AddressService } from './services/address.service';
 
@@ -32,6 +33,7 @@ import { AddressService } from './services/address.service';
     UserRoleGuard,
     AppConfirmService,
     PersonalService,
+    UserService,
     DepartmentService,
     AddressService,
     AppLoaderService
