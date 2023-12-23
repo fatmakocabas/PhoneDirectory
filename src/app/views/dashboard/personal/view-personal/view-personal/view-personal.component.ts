@@ -111,7 +111,7 @@ export class ViewPersonalComponent implements OnInit {
       ext: [personal?.ext || "", Validators.required],
       title: [personal?.title || ""],
       section: [personal?.sectionId || null],
-      order: [personal?.order || null],
+      order: [personal?.order || null , Validators.required],
       department: [personal?.departmentId || null],
     });
 
