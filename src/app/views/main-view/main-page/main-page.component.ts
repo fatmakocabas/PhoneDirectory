@@ -36,8 +36,7 @@ export class MainPageComponent implements OnInit, OnDestroy {
       .subscribe((res) => {
         this.personelList = res;
         if (this.personelList) {
-          this.personelList = res; // ilk öğeyi al
-          console.log(this.personelList);
+          this.personelList = res; // ilk öğeyi al         
         }
       });
   }

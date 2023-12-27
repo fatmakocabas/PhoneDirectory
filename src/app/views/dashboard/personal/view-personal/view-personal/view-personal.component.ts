@@ -132,7 +132,6 @@ export class ViewPersonalComponent implements OnInit {
       this.sectionListByDepartment.unshift(null);
     });
 
-    console.log("personelForm", this.personalForm);
   }
   loadDepartments() {
     this.departmentService.allDepartments().subscribe(
