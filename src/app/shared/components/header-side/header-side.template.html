@@ -6,22 +6,22 @@
   </button>
 
   <span fxFlex></span>
+
   <!-- Language Switcher -->
   <!-- <button mat-button [matMenuTriggerFor]="menu">
     <span class="fi fi-{{currentLang.flag}} mr-8"></span>
     <span>{{currentLang.name}}</span>
-  </button> -->
-  <!-- <mat-menu #menu="matMenu">
+  </button>
+
+  <mat-menu #menu="matMenu">
     <button mat-menu-item *ngFor="let lang of availableLangs" (click)="setLang(lang)">
       <span class="fi mr-8 fi-{{lang.flag}}"></span>
       <span>{{lang.name}}</span>
     </button>
-  </mat-menu>
+  </mat-menu> -->
 
-  <matx-search-input-over placeholder="Country (e.g. US)" resultPage="/search"></matx-search-input-over>  -->
-  <!-- Open "views/search-view/result-page.component" to know more about subscribing to input field value -->
+  <!-- <matx-search-input-over placeholder="Country (e.g. US)" resultPage="/search"></matx-search-input-over>  
 
-  <!-- Notification toggle button
   <button
     mat-icon-button
     matTooltip="Notifications"
@@ -33,28 +33,15 @@
     <span class="notification-number mat-bg-warn">3</span>
   </button> -->
 
-
   <!-- Top left user menu -->
-  <button mat-icon-button [matMenuTriggerFor]="" class="topbar-button-right img-button">
+
+  <button mat-icon-button [matMenuTriggerFor]="appUserMenu" class="topbar-button-right img-button">
     <img src="assets/images/faces/fatma.jpg" alt="" />
   </button>
-
-  <!-- <mat-menu #accountMenu="matMenu">
-    <button mat-menu-item [routerLink]="['/profile/overview']">
-      <mat-icon>account_box</mat-icon>
-      <span>Profile</span>
-    </button>
-    <button mat-menu-item [routerLink]="['/profile/settings']">
-      <mat-icon>settings</mat-icon>
-      <span>Account Settings</span>
-    </button>
-    <button mat-menu-item>
-      <mat-icon>notifications_off</mat-icon>
-      <span>Disable alerts</span>
-    </button>
+  <mat-menu #appUserMenu="matMenu">
     <button mat-menu-item (click)="jwtAuth.signout()">
       <mat-icon>exit_to_app</mat-icon>
-      <span>{{ "SIGNOUT" | translate }}</span>
+      <span>Çıkış Yap</span>
     </button>
-  </mat-menu> -->
+  </mat-menu>
 </mat-toolbar>

@@ -135,7 +135,7 @@ export class ViewUserComponent implements OnInit {
 
     const controls = this.userForm.controls;
     const userRequest: UserRequest = {
-      //id: controls["id"].value,
+      id: this.userId,
       email: controls["email"].value,
       userName: controls["userName"].value,
       name: controls["name"].value,
