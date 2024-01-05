@@ -112,11 +112,11 @@ export class ViewPersonalComponent implements OnInit {
       ext: [personal?.ext || "", Validators.required],
       title: [personal?.title || ""],
       section: [personal?.sectionId || null],
-<<<<<<< Updated upstream
+
       order: [personal?.order || null , Validators.required],
-=======
-      order: [personal?.order || null,  Validators.required],
->>>>>>> Stashed changes
+
+     
+
       department: [personal?.departmentId || null],
     });
 
