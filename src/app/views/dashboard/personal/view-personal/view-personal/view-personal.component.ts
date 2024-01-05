@@ -255,11 +255,18 @@ export class ViewPersonalComponent implements OnInit {
           }, 2000)
 
         },
-        (error) => {
-          this.snackbar.open('Personel eklenemedi!', undefined, {
-            duration: 2000
-          })
+        // (error) => {
+        //   this.snackbar.open('Personel eklenemedi!', undefined, {
+        //     duration: 2000
+        //   })
 
+        // }
+        (errorReponse) => {
+          const errorMessage = errorReponse.error;
+
+          this.snackbar.open(errorMessage, undefined ,{
+            duration:2000
+          });
         }
       )
   }
