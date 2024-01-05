@@ -209,7 +209,7 @@ export class ViewDepartmentComponent implements OnInit {
 
       },
       (error) =>{
-         this.snackbar.open('Müdürlük eklenemedi!',undefined,{
+         this.snackbar.open('Eklemeye çalıştığınız adres, kat ve sıra aynı olmamalıdır.',undefined,{
            duration: 2000
          })
 

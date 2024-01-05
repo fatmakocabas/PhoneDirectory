@@ -36,6 +36,7 @@ export class ViewPersonalComponent implements OnInit {
     email: "",
     mobile: 0,
     ext: "",
+    order:0,
     title: "",
     profileImageUrl: "",
     departmentId: "",
@@ -111,7 +112,11 @@ export class ViewPersonalComponent implements OnInit {
       ext: [personal?.ext || "", Validators.required],
       title: [personal?.title || ""],
       section: [personal?.sectionId || null],
+<<<<<<< Updated upstream
       order: [personal?.order || null , Validators.required],
+=======
+      order: [personal?.order || null,  Validators.required],
+>>>>>>> Stashed changes
       department: [personal?.departmentId || null],
     });
 
@@ -127,7 +132,7 @@ export class ViewPersonalComponent implements OnInit {
     }
 
     // department değişikliğinde sectionListByDepartment'in güncellenmesi için bir listener ekleyin
-    this.personalForm.get('department')?.valueChanges.subscribe(selectedDepartmentId => {
+      this.personalForm.get('department')?.valueChanges.subscribe(selectedDepartmentId => {
       this.sectionListByDepartment = this.sectionList.filter(section => section.departmentId === selectedDepartmentId);
       this.sectionListByDepartment.unshift(null);
     });
