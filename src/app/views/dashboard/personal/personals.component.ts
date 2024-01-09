@@ -26,7 +26,7 @@ export class PersonalsComponent implements OnInit, AfterViewInit {
 
 
   personals:Personal[]=[];
-  displayedColumns: string[] = ['firstName', 'lastName', 'dateOfBirth', 'email', 'mobile', 'department.name','section.name','order','action',];
+  displayedColumns: string[] = ['firstName', 'lastName', 'title', 'dateOfBirth', 'email', 'mobile', 'department.name','section.name','order','action',];
   dataSource:MatTableDataSource<Personal> = new MatTableDataSource<Personal>();
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
