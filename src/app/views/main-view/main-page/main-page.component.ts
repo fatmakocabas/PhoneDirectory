@@ -10,10 +10,14 @@ import { PersonalService } from "app/shared/services/personal.service";
 export class MainPageComponent implements OnInit, OnDestroy {
   loaded = false;
   personelList: any[];
+  currentYear: number;
   constructor(
     private cdr: ChangeDetectorRef,
     public personalService: PersonalService
-  ) {}
+  ) {
+      const currentDate = new Date();
+      this.currentYear = currentDate.getFullYear();  
+  }
 
   ngOnInit() {
     this.loaded = true;
