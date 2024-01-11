@@ -8,6 +8,7 @@ import {
   Validators,
 } from "@angular/forms";
 import { MatAutocompleteSelectedEvent } from "@angular/material/autocomplete";
+import { MatSelectChange } from "@angular/material/select";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { ActivatedRoute, Router } from "@angular/router";
 import { DepartmentRequest } from "app/shared/models/DepartmentRequest";
@@ -71,6 +72,8 @@ export class ViewDepartmentComponent implements OnInit {
           (success) => {
             debugger;
             this.department = success;
+            this.selectedFloor= success.address.floor;
+            this.console.log( "kat:"+this.selectedFloor);
             this.initForm(this.department);
           },
           (error) => {
@@ -134,6 +137,7 @@ export class ViewDepartmentComponent implements OnInit {
       fax: controls["fax"].value,
       addressId: controls["address"].value,
       order:controls["order"].value,
+      floor: this.selectedFloor,
       section:controls["sectionList"].value,
     }
    
@@ -150,12 +154,14 @@ export class ViewDepartmentComponent implements OnInit {
           );
           this.router.navigateByUrl("admin/departments");
         },
-        (error) => {          
+        (error) => {      
+          debugger;    
           const regex = /foreignkey/i; // "FK_Personal_Section_SectionId"
           if (error?.error && regex.test(error.error)) {
            this.snackbar.open("Silmeye çalıştığınız birimde, bir veya daha fazla çalışan bu birime bağlıdır.", undefined, { duration: 2000 });
-          } else {
-            this.snackbar.open("Bir hata oluştu, lütfen tekrar deneyin.", undefined, { duration: 2000 });
+          }          
+           else {
+            this.snackbar.open(error?.error , undefined, { duration: 2000 });
           }
         }
       );
@@ -186,13 +192,22 @@ export class ViewDepartmentComponent implements OnInit {
     )
   }
 
+  onAddressSelectionChange(event: MatSelectChange): void {
+    const selectedAddress = this.addressList.find(address => address.id === event.value);
+    if (selectedAddress) {
+      this.selectedFloor = selectedAddress.floor;
+      console.log("floor" +this.selectedFloor );
+    }
+  }
+   selectedFloor:number=0;
   onAdd() {
-    const controls = this.departmentForm.controls;
+    const controls = this.departmentForm.controls;  
     const departmentRequest : DepartmentRequest ={
       name: controls["name"].value,
       description: controls["description"].value,
       fax: controls["fax"].value,
       addressId: controls["address"].value,
+      floor:this.selectedFloor ,
       order:controls["order"].value,
       section:controls["sectionList"].value,
     }

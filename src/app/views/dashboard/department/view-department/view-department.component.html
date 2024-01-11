@@ -63,7 +63,7 @@
                         <div class="pb-16">
                             <div class="flex-container">                             
                                 <mat-form-field  class="flex-item" appearance="outline">
-                                    <mat-select name="address" formControlName="address"  placeholder="Kat" [required]="true">
+                                    <mat-select name="address" formControlName="address"  placeholder="Kat" [required]="true" (selectionChange)="onAddressSelectionChange($event)">
                                         <mat-option *ngFor="let address of addressList" [value]="address.id">
                                             {{ address.floor}}
                                         </mat-option>

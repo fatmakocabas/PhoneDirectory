@@ -7,4 +7,5 @@ export interface DepartmentRequest {
   addressId: string,
   section?:string,
   order:number, 
+  floor:number, 
 }

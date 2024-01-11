@@ -22,7 +22,7 @@ import { DepartmentService } from "app/shared/services/department.service";
 export class DepartmentsComponent implements OnInit, AfterViewInit {
   
   departments:Department[]=[];
-  displayedColumns: string[] = ['name', 'description', 'order', 'address.name','action'];
+  displayedColumns: string[] = ['name', 'description', 'address.name' , 'order','action'];
   dataSource:MatTableDataSource<Department> = new MatTableDataSource<Department>();
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
