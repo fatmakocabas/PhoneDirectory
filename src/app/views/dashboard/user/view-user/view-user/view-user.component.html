@@ -58,7 +58,7 @@
                         <div class="row between-xs" *ngIf="!isNewUser">
                             <button mat-raised-button color="primary" (click)="onUpdate()"
                                 [disabled]="userForm.invalid">Kaydet</button>
-                            <button mat-raised-button color="warn" style="margin-left: 10px;" (click)="onDelete()"
+                            <button mat-raised-button color="warn" style="margin-left: 10px;" (click)="openDeleteConfirmationDialog()"
                                 [disabled]="userForm.invalid">Sil</button>
                         </div>
                         <div class="row between-xs" *ngIf="isNewUser">

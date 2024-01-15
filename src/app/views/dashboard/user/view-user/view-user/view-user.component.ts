@@ -16,6 +16,8 @@ import { DepartmentSection } from "app/shared/models/departmentSection.model";
 import { User } from "app/shared/models/user.model";
 import { DepartmentService } from "app/shared/services/department.service";
 import { UserService } from "app/shared/services/user.service";
+import { MatDialog } from "@angular/material/dialog";
+import { AppComfirmComponent } from "app/shared/services/app-confirm/app-confirm.component";
 
 @Component({
   selector: "app-view-user",
@@ -44,6 +46,7 @@ export class ViewUserComponent implements OnInit {
   header = "";
   displayProfileImageUrl = "";
   constructor(
+    public dialog: MatDialog,
     private fb: FormBuilder,
     private snackbar: MatSnackBar,
     private userService: UserService,
@@ -51,6 +54,25 @@ export class ViewUserComponent implements OnInit {
     private readonly route: ActivatedRoute,
     private router: Router
   ) { }
+
+  openDeleteConfirmationDialog(): void {
+    const dialogRef = this.dialog.open(AppComfirmComponent, {
+      width: '400px',
+      data: {
+        title: 'Uyarı!',
+        message: 'Kullanıcı kaydını silmek istediğinize emin misiniz?',
+      },
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.onDelete();
+        console.log('Item deleted!');
+      } else {
+        console.log('Deletion canceled.');
+      }
+    });
+  }
 
   ngOnInit(): void {
     this.loading = true;
