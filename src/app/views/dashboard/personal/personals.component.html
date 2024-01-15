@@ -54,7 +54,7 @@
             </ng-container>
             <ng-container matColumnDef="dateOfBirth">
               <th mat-header-cell *matHeaderCellDef mat-sort-header>Doğum Tarihi</th>
-              <td mat-cell *matCellDef="let element">{{element.dateOfBirth | date:'yyyy-MM-dd'}} </td>
+              <td mat-cell *matCellDef="let element">{{element.dateOfBirth | date:'dd.MM.yyyy'}} </td>
             </ng-container>
             <ng-container matColumnDef="email">
               <th mat-header-cell *matHeaderCellDef mat-sort-header> Mail </th>
@@ -62,7 +62,7 @@
             </ng-container>
 
             <ng-container matColumnDef="mobile">
-              <th mat-header-cell *matHeaderCellDef mat-sort-header> Dahili </th>
+              <th mat-header-cell *matHeaderCellDef > Dahili </th>
               <td mat-cell *matCellDef="let element"> {{element.ext}} </td>
             </ng-container>
 

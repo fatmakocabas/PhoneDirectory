@@ -36,32 +36,53 @@ export class PersonalsComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {}
   ngOnInit() {
-
     this.personalService.allPersonels().subscribe(
-      (success) =>{
-       
+      (success) => {
         this.personals = success;
-
-
+  
         this.dataSource = new MatTableDataSource<Personal>(this.personals);
-
+  
         this.dataSource.sortingDataAccessor = (item, property) => {
-          switch(property) {
-            case 'department.name': return item.department.name;
-            default: return property;
+          switch (property) {
+            case 'department.name':
+              return this.getTurkishSortableString(item.department && item.department.name ? item.department.name : '');
+            case 'dateOfBirth':
+              return new Date(item.dateOfBirth);
+            // Diğer sütunlarda gerekirse ekleyebilirsiniz
+            case 'firstName':
+            case 'lastName':
+            case 'title':
+            case 'email':
+            case 'mobile':
+            case 'section.name':
+            case 'order':
+              return this.getTurkishSortableString(item[property]);
+            default:
+              return item[property];
           }
         };
-        this.dataSource.paginator=this.paginator;
-        this.dataSource.sort=this.sort;
+        
+        
+        this.dataSource.sort = this.sort;
+        this.dataSource.paginator = this.paginator;
+        
+            
+        
+        
       },
       (error) => {
         console.error("Error occurred:", error);
       }
-
     );
-    
   }
-
-  
-  
+  getTurkishSortableString(value: string): string {
+    if (value && typeof value === 'string') {
+      const turkishCharacters = { 'ç': 'c', 'ğ': 'g', 'ı': 'i', 'ö': 'o', 'ş': 's', 'ü': 'u' };
+    
+      return value
+        .toLocaleLowerCase('tr-TR')
+        .replace(/[çğıöşü]/g, char => turkishCharacters[char] || char);
+    }
+    return value;
+  }
 }

@@ -38,13 +38,16 @@ export class DepartmentsComponent implements OnInit, AfterViewInit {
         this.departments = success;
         this.dataSource = new MatTableDataSource<Department>(this.departments);
         this.dataSource.sortingDataAccessor = (item, property) => {
-          switch(property) {
-            case 'address.name': return item.address.physicalAdress;
-            default: return property;
+          switch (property) {
+            case 'address.name':
+              return this.getTurkishSortableString(item.address.physicalAdress);
+            default:
+              return this.getTurkishSortableString(item[property]);
           }
         };
-        this.dataSource.paginator=this.paginator;
         this.dataSource.sort=this.sort;
+        this.dataSource.paginator=this.paginator;
+       
       },
       (error) => {
         console.error("Error occurred:", error);
@@ -52,5 +55,15 @@ export class DepartmentsComponent implements OnInit, AfterViewInit {
 
     );
     
+  }
+  getTurkishSortableString(value: string): string {
+    if (value && typeof value === 'string') {
+      const turkishCharacters = { 'ç': 'c', 'ğ': 'g', 'ı': 'i', 'ö': 'o', 'ş': 's', 'ü': 'u' };
+  
+      return value
+        .toLocaleLowerCase('tr-TR')
+        .replace(/[çğıöşü]/g, char => turkishCharacters[char] || char);
+    }
+    return value;
   }
 }
