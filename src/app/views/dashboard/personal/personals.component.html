@@ -1,8 +1,20 @@
 <div class="mt--72">
+  <div class="search-container">
+    <mat-form-field appearance="outline">
+      <mat-label>Ara...</mat-label>
+      <input matInput [(ngModel)]="searchInput" (input)="applyFilter()" />
+      <button mat-button matSuffix mat-icon-button aria-label="Ara" >
+        <mat-icon>search</mat-icon>
+      </button>
+    </mat-form-field>
+  </div>
   <div fxLayout="row wrap">
     <div fxFlex="100" fxFlex.sm="100" fxFlex.gt-sm="100">
+      
       <!-- <mat-card class="p-0 overflow-x-auto" fxLayout="row wrap"> -->
+       
       <mat-card class="p-0">
+       
         <!-- <mat-card-title class="align-items-center">
           <div class="card-title-container ">
             <div class="back-icon">
@@ -14,8 +26,9 @@
           </div>
           <mat-divider></mat-divider>
         </mat-card-title> -->
-
+        
         <mat-card-title class="align-items-center">
+         
           <div class="card-title-container ">
               <div class="card-title-text ">Personeller</div>
               <div class="back-icon"> 
@@ -31,6 +44,7 @@
         <mat-card-content>
           <table mat-table fxFlex [dataSource]="dataSource" *ngIf="dataSource" matSort
             class="mat-elevation-z1 min-w-600">
+            
             <!-- image Column -->
             <ng-container matColumnDef="firstName">
               <th mat-header-cell *matHeaderCellDef mat-sort-header>Adı</th>

@@ -17,6 +17,8 @@ import { DepartmentsComponent } from "./department/departments.component";
 import { ViewDepartmentComponent } from "./department/view-department/view-department.component";
 import { AddressesComponent } from "./address/addresses.component";
 import { ViewAddressComponent } from "./address/view-address/view-address.component";
+import { FormsModule } from '@angular/forms';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -24,6 +26,7 @@ import { ViewAddressComponent } from "./address/view-address/view-address.compon
     SharedMaterialModule,
     FlexLayoutModule,
     NgChartsModule,
+    FormsModule,
     NgxEchartsModule.forRoot({
       echarts: () => import('echarts')
     }),
