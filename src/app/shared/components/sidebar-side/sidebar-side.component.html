@@ -1,13 +1,14 @@
 <div class="sidebar-panel">
   <div id="scroll-area" [perfectScrollbar] class="navigation-hold" fxLayout="column">
     <div class="sidebar-hold">
-      <div class="branding">
-        <img src="assets/images/logo.png" alt="" class="app-logo" style="height: 60px; width: 150px;" />
-        <span class="app-logo-text">Rehber</span>
-
-        <span style="margin: auto" *ngIf="layoutConf.sidebarStyle !== 'compact'"></span>
-
-      </div>
+      <a routerLink="/">
+        <div class="branding">
+          <img src="assets/images/logo.png" alt="" class="app-logo" style="height: 60px; width: 150px;" />
+          <span class="app-logo-text">Rehber</span>
+  
+          <span style="margin: auto" *ngIf="layoutConf.sidebarStyle !== 'compact'"></span>
+        </div>
+        </a>
       <div class="app-user">
         <div class="app-user-photo">
           <img src="assets/images/faces/fatma.jpg" class="mat-elevation-z1" alt="" />
