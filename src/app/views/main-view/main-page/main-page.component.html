@@ -1,23 +1,33 @@
-<div class="m-16">
-  <a routerLink='/'>
+<div style="display: flex;">
+  <div style="justify-content: space-between;"><a routerLink='/'>
     <img src="./assets/images/logo.png" style="width: 175px;" alt="Rehber">
-  </a>
-  <h2 class="mt-1 text-center" style="color: navy; font-family: Arial, sans-serif; font-weight: bold;">Müdürlük Dahili
-    Telefon Listesi</h2>
+  </a></div>
+  <div style="justify-content: space-between;
+      width: 100%;
+      text-align: center;
+      /* height: 80px; */
+      margin-top: 30px;
+      margin-left: -175px;
+      font-size: 18px;
+      font-weight: bold;
+      color: #17469e;
+  ">
+  <span>Müdürlük Dahili Telefon Listesi</span>
+</div>
 </div>
 <div class="outer-container">
   <ng-container *ngFor="let uniqueAddress of uniqueAddresses">
-    <div class="card-header">
-      <h2 >{{ uniqueAddress.physicalAdress }}</h2>
+    <div class="card-header" style="margin:0 !important; padding: 3px !important;">
+      <h2 style="margin:1px !important; font-weight: bold; color: #000000a4;">{{ uniqueAddress.physicalAdress }}</h2>
     </div>
     <div class="card-container">
       <ng-container *ngFor="let department of getDepartmentsByAddress(uniqueAddress)">
         <mat-card class="user-card p-0">
           <mat-card-title class="mb-16">
-            <div class="card-title-text">
+            <div class="card-title-text" style="margin:0px !important;">
               <div class="title">
-                <h2>{{ department.name }}</h2>
-                <h5 style="color: red; font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif">fax: {{ department.fax }}</h5>
+                <h2 style="color: #17469e; font-weight: bold;">{{ department.name }}</h2>
+                <h5 style="color: #589945; font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; width:175px; text-align: right; font-size: 13px;"><mat-icon style="vertical-align: middle; font-size: 22px;">print</mat-icon> {{ department.fax }}</h5>
             </div>
             </div>
             <mat-divider></mat-divider>
@@ -25,10 +35,10 @@
           <mat-card-content>
             <table class="table">
               <thead>
-                <tr>
+                <tr style="font-size: 13px;">
                   <th>No</th>
                   <th>Adı Soyadı</th>
-                  <th>Ünvanı</th>
+                  <!--<th>Ünvanı</th>-->
                   <th>Dahili</th>
                 </tr>
               </thead>
@@ -37,13 +47,13 @@
                   <ng-container *ngFor="let person of department.orderedPersons; let i = index">
                     <ng-container *ngIf="person.showSectionTitle">
                       <tr>
-                        <td colspan="4" class="section-title">{{ person.section.name || '' }}</td>
+                        <td colspan="4" style="font-size: 12px; font-weight: bold;" class="section-title">{{ person.section.name || '' }}</td>
                       </tr>
                     </ng-container>
-                    <tr>
+                    <tr style="font-size: 12px;">
                       <td>{{ i + 1 }}</td>
                       <td>{{ person.firstName }} {{ person.lastName }}</td>
-                      <td>{{ person.title }}</td>
+                      <!--<td>{{ person.title }}</td>-->
                       <td>{{ person.ext }}</td>
                     </tr>
                   </ng-container>

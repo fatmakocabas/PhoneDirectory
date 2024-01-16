@@ -1,5 +1,5 @@
 .card-header {
-    background-color: #f2f2f2;
+    background-color: #68aadf40;
     padding: 8px;
     border-radius: 4px;
     margin: 8px 0;
@@ -7,8 +7,10 @@
   }
 .card-container {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(420px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
     gap: 16px;
+    padding-top: 10px;
+    padding-bottom: 10px;
   }
   .card-title-text{
     text-align: center;
@@ -32,8 +34,10 @@
     padding: 16px;
     margin: 8px;
     width: 100%;
-    max-width: 420px;
+    max-width: 340px;
     box-sizing: border-box;
+    overflow-y: auto;
+    max-height: 400px;
   }
   
   .card-content {
@@ -47,7 +51,7 @@
     border: 1px solid #e0e0e0;
     padding: 16px;
     margin: 0 10px;
-    height: 78vh; 
+    height: 86vh; 
     overflow: auto; /* İçerik artarsa kaydırma çubuğunu görüntüler */
   }
   table {
