@@ -14,6 +14,7 @@ import { Personal } from "app/shared/models/personal.model";
 import { MatTableDataSource } from "@angular/material/table";
 import { MatPaginator } from "@angular/material/paginator";
 import { MatSort } from "@angular/material/sort";
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: "app-personals",
@@ -23,7 +24,7 @@ import { MatSort } from "@angular/material/sort";
 })
 export class PersonalsComponent implements OnInit, AfterViewInit {
 
-
+  
 
   personals:Personal[]=[];
   displayedColumns: string[] = ['firstName', 'lastName', 'title', 'dateOfBirth', 'email', 'mobile', 'department.name','section.name','order','action',];
@@ -84,5 +85,9 @@ export class PersonalsComponent implements OnInit, AfterViewInit {
         .replace(/[çğıöşü]/g, char => turkishCharacters[char] || char);
     }
     return value;
+  }
+  searchInput: string = '';
+  applyFilter() {
+    this.dataSource.filter = this.searchInput.trim().toLowerCase();
   }
 }
