@@ -15,5 +15,6 @@ export interface Personal {
   department: Department,
   sectionId?:string,
   section?:DepartmentSection,
-  order?:number, 
+  order?:number,
+  isActive?:boolean
 }

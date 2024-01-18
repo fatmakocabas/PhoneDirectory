@@ -38,9 +38,10 @@ export class ViewPersonalComponent implements OnInit {
     email: "",
     mobile: 0,
     ext: "",
-    order:0,
+    order: 0,
     title: "",
     profileImageUrl: "",
+    isActive: true,
     departmentId: "",
     department: {
       id: "",
@@ -55,8 +56,6 @@ export class ViewPersonalComponent implements OnInit {
       },
     },
     sectionId: "",
-
-
 
   };
   deparmentList: Department[] = [];
@@ -134,12 +133,9 @@ export class ViewPersonalComponent implements OnInit {
       ext: [personal?.ext || "", Validators.required],
       title: [personal?.title || ""],
       section: [personal?.sectionId || null],
-
-      order: [personal?.order || null , Validators.required],
-
-     
-
+      order: [personal?.order || null, Validators.required],
       department: [personal?.departmentId || null],
+      isActive: [personal?.isActive || null],
     });
 
     // Eğer personal nesnesi varsa ve sectionId doluysa, bu sectionId'ye karşılık gelen section'ı seçili hale getir
@@ -154,7 +150,7 @@ export class ViewPersonalComponent implements OnInit {
     }
 
     // department değişikliğinde sectionListByDepartment'in güncellenmesi için bir listener ekleyin
-      this.personalForm.get('department')?.valueChanges.subscribe(selectedDepartmentId => {
+    this.personalForm.get('department')?.valueChanges.subscribe(selectedDepartmentId => {
       this.sectionListByDepartment = this.sectionList.filter(section => section.departmentId === selectedDepartmentId);
       this.sectionListByDepartment.unshift(null);
     });
@@ -205,6 +201,7 @@ export class ViewPersonalComponent implements OnInit {
       title: controls["title"].value,
       order: controls["order"].value,
       sectionId: controls["section"].value,
+      isActive: controls["isActive"].value
     }
 
     this.personalService
@@ -269,6 +266,7 @@ export class ViewPersonalComponent implements OnInit {
       title: controls["title"].value,
       order: controls["order"].value,
       sectionId: controls["section"].value,
+      isActive: controls["isActive"].value
     }
 
     this.personalService.addPersonal(personalRequest)
@@ -291,8 +289,8 @@ export class ViewPersonalComponent implements OnInit {
         (errorReponse) => {
           const errorMessage = errorReponse.error;
 
-          this.snackbar.open(errorMessage, undefined ,{
-            duration:2000
+          this.snackbar.open(errorMessage, undefined, {
+            duration: 2000
           });
         }
       )

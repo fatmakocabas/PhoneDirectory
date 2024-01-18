@@ -24,25 +24,25 @@ import { FormsModule } from '@angular/forms';
 })
 export class PersonalsComponent implements OnInit, AfterViewInit {
 
-  
 
-  personals:Personal[]=[];
-  displayedColumns: string[] = ['firstName', 'lastName', 'title', 'dateOfBirth', 'email', 'mobile', 'department.name','section.name','order','action',];
-  dataSource:MatTableDataSource<Personal> = new MatTableDataSource<Personal>();
+
+  personals: Personal[] = [];
+  displayedColumns: string[] = ['firstName', 'lastName', 'dateOfBirth', 'email', 'mobile', 'department.name', 'section.name', 'order', 'isActive', 'action',];
+  dataSource: MatTableDataSource<Personal> = new MatTableDataSource<Personal>();
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   filterString = '';
 
-  constructor(private themeService: ThemeService, private personalService: PersonalService) {}
+  constructor(private themeService: ThemeService, private personalService: PersonalService) { }
 
-  ngAfterViewInit() {}
+  ngAfterViewInit() { }
   ngOnInit() {
     this.personalService.allPersonels().subscribe(
       (success) => {
         this.personals = success;
-  
+
         this.dataSource = new MatTableDataSource<Personal>(this.personals);
-  
+
         this.dataSource.sortingDataAccessor = (item, property) => {
           switch (property) {
             case 'department.name':
@@ -52,7 +52,7 @@ export class PersonalsComponent implements OnInit, AfterViewInit {
             // Diğer sütunlarda gerekirse ekleyebilirsiniz
             case 'firstName':
             case 'lastName':
-            case 'title':
+            //case 'title':
             case 'email':
             case 'mobile':
             case 'section.name':
@@ -62,14 +62,10 @@ export class PersonalsComponent implements OnInit, AfterViewInit {
               return item[property];
           }
         };
-        
-        
+
         this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;
-        
-            
-        
-        
+
       },
       (error) => {
         console.error("Error occurred:", error);
@@ -79,7 +75,7 @@ export class PersonalsComponent implements OnInit, AfterViewInit {
   getTurkishSortableString(value: string): string {
     if (value && typeof value === 'string') {
       const turkishCharacters = { 'ç': 'c', 'ğ': 'g', 'ı': 'i', 'ö': 'o', 'ş': 's', 'ü': 'u' };
-    
+
       return value
         .toLocaleLowerCase('tr-TR')
         .replace(/[çğıöşü]/g, char => turkishCharacters[char] || char);

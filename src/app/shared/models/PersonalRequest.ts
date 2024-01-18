@@ -10,5 +10,6 @@ export interface PersonalRequest {
   departmentId: string,
   sectionId:string,
   order:number,
+  isActive?:boolean
  
 }

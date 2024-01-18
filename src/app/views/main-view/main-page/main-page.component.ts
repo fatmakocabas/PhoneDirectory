@@ -38,9 +38,11 @@ export class MainPageComponent implements OnInit, OnDestroy {
         })
       )
       .subscribe((res) => {
-        this.personelList = res;
+      this.personelList =res;
         if (this.personelList) {
-          this.personelList = res; // ilk öğeyi al         
+          debugger;
+          this.personelList = this.personelList.filter(personel => personel.isActive === true);
+          console.log (this.personelList);
         }
       });
   }

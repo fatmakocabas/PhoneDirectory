@@ -78,6 +78,7 @@
                                 </mat-form-field>
                               </div>
                         </div>
+                       
                         <div class="pb-16">
                             <div class="flex-container">   
                             <mat-form-field  class="flex-item" appearance="outline">
@@ -94,6 +95,12 @@
                                       </mat-option>
                                 </mat-select>
                             </mat-form-field>
+                            </div>
+                         
+                        </div>
+                        <div class="pb-16" *ngIf="!isNewPersonal">
+                            <div class="flex-container">
+                                <mat-checkbox  formControlName="isActive">Aktif mi?</mat-checkbox>
                             </div>
                         </div>
                     </div>
