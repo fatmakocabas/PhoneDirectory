@@ -103,3 +103,12 @@
   font-style: italic; 
   font-size: 1.0em;
   }
+  .adminStyle {
+    color: transparent; 
+    background-color: transparent;
+    padding: 5px 10px;
+    transition: color 0.3s;
+  }
+  .adminStyle:hover {
+    color: gray;
+  }
