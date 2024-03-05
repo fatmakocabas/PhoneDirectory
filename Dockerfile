@@ -9,9 +9,6 @@ WORKDIR /usr/local/app
 # Add the source code to app
 COPY ./ /usr/local/app/
 
-# remove package.json
-RUN rm -rf /usr/local/app/package.json
-
 # Install all the dependencies
 RUN npm install
 
