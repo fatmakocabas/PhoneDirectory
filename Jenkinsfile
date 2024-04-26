@@ -42,7 +42,7 @@ pipeline {
         }
         stage('build docker nginx image and deploy dist file') {
             steps{
-                sh 'docker build -t ayildiz89/phone-ui:v8 .'
+                sh 'docker build -t fatmakocabas/phone-ui:v3 .'
             }
         }
         
