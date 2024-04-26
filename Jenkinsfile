@@ -4,6 +4,7 @@ pipeline {
     //agent { label 'jenkins-agent-node-jdk'} 
     
      tools {nodejs "nodejs"}
+     tools {docker "docker"}
 
 
     stages {
