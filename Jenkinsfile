@@ -49,8 +49,8 @@ pipeline {
         }
         stage('build docker nginx image and deploy dist file') {
             steps{
-                sh 'docker build -t fatmakocabas/phone-ui:v4 .'
-                sh 'docker push'
+                sh 'podman build -t fatmakocabas/phone-ui:v4 .'
+                sh 'podman push'
             }
         }
         
