@@ -3,10 +3,10 @@ pipeline {
     agent any
     //agent { label 'jenkins-agent-node-jdk'} 
     
-     tools {nodejs "nodejs"
-            docker "docker"
-     }
-
+    tools {nodejs "nodejs" }
+    environment {
+        DOCKER_HOME = tool name: 'docker', type: 'org.jenkinsci.plugins.docker.commons.tools.DockerTool'
+    }
 
     stages {
         // stage('Repository Check') {
@@ -42,9 +42,17 @@ pipeline {
                 archive 'dist.tar.gz'
             }
         }
+        stage('Docker Login') {
+            steps {
+                withCredentials([usernamePassword(credentialsId: 'DockerRegistry', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+                    sh '${DOCKER_HOME}/docker login -u $USERNAME --password $PASSWORD'
+                }
+            }
+        }
         stage('build docker nginx image and deploy dist file') {
             steps{
-                sh 'docker build -t fatmakocabas/phone-ui:v3 .'
+                sh '${DOCKER_HOME}/docker build -t fatmakocabas/phone-ui:v4 .'
+                sh '${DOCKER_HOME}/docker push'
             }
         }
         

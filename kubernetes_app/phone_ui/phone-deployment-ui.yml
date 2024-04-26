@@ -35,7 +35,7 @@ spec:
                 - worker-node2
       containers:
         - name: container-phone-ui-jenkins
-          image: fatmakocabas/phone-ui:v3
+          image: fatmakocabas/phone-ui:v4
           imagePullPolicy: Always
           ports:
           - containerPort: 80
