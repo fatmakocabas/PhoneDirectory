@@ -3,7 +3,7 @@ pipeline {
     agent any
     //agent { label 'jenkins-agent-node-jdk'} 
     
-     tools {nodejs "nodeJs"}
+     tools {nodejs "nodejs"}
 
 
     stages {
