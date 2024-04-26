@@ -3,7 +3,7 @@ pipeline {
     agent {label 'master'}
     //agent { label 'jenkins-agent-node-jdk'} 
     
-     tools {nodejs "nodeJs"}
+     //tools {nodejs "nodeJs"}
 
 
     stages {
@@ -18,6 +18,7 @@ pipeline {
         //         }
         //     }
         // }
+     
         stage('NPM Install') {
             //agent { label 'jenkins-agent-node-jdk'} 
             steps {
