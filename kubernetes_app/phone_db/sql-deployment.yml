@@ -1,24 +1,24 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: mssql-deployment
+  name: mssql-deployment-jenkins
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: mssql
+      app: mssql-jenkins
   strategy:
     type: Recreate
   template:
     metadata:
       labels:
-        app: mssql
+        app: mssql-jenkins
     spec:
       terminationGracePeriodSeconds: 10
       securityContext:
         fsGroup: 1000
       containers:
-      - name: mssql
+      - name: mssql-jenkins
         image: mcr.microsoft.com/mssql/rhel/server:2019-latest
         env:
         - name: ACCEPT_EULA

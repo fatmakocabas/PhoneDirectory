@@ -1,19 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: phone-api-deployment
+  name: phone-api-jenkins-deployment
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: phone-api
+      app: phone-api-jenkins
   template:
     metadata:
       labels:
-        app: phone-api
+        app: phone-api-jenkins
     spec:
       containers:
-        - name: phone-api
+        - name: phone-api-jenkins
           image: fatmakocabas/phone-api:v2
           ports:
             - containerPort: 80 

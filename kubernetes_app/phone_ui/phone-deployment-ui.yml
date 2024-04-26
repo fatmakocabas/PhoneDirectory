@@ -1,11 +1,11 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: phone-ui
+  name: phone-ui-jenkins
 spec:
   selector:
     matchLabels:
-      app: phone-ui
+      app: phone-ui-jenkins
   strategy:
     type: RollingUpdate
     rollingUpdate:
@@ -14,7 +14,7 @@ spec:
   template:
     metadata:
      labels:
-      app: phone-ui
+      app: phone-ui-jenkins
     spec:
       affinity:
         nodeAffinity:
@@ -34,7 +34,7 @@ spec:
                 values:
                 - worker-node2
       containers:
-        - name: container-phone-ui
+        - name: container-phone-ui-jenkins
           image: fatmakocabas/phone-ui:v3
           imagePullPolicy: Always
           ports:
