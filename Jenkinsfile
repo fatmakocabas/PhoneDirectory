@@ -1,6 +1,6 @@
 pipeline {
     
-    agent {label 'master'}
+    agent any
     //agent { label 'jenkins-agent-node-jdk'} 
     
      //tools {nodejs "nodeJs"}
