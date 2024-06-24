@@ -50,6 +50,14 @@
                                 *ngIf="userForm.controls['surname'].hasError('required') && userForm.controls['surname'].touched"
                                 class="form-error-msg"> Soyadı Zorunlu </small>
                         </div>
+                        <div class="pb-16">
+                            <mat-form-field class="full-width">
+                                <input matInput name="password" type="password" formControlName="password" placeholder="Şifre" value="">
+                            </mat-form-field>
+                            <small
+                                *ngIf="userForm.controls['password'].hasError('required') && userForm.controls['password'].touched"
+                                class="form-error-msg"> Şifre Sorunlu </small>
+                        </div>
                     </div>
                 </div>
 

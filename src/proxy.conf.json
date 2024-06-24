@@ -1,35 +1,35 @@
 {
   "/api/*": {
-    "target": "https://localhost:7199/",
+    "target": "https://localhost:44365/",
     "secure": false,
     "logLevel": "debug",
     "changeOrigin": true,
-    "pathRewrite": {"^/api" : "https://localhost:7199/api"}
+    "pathRewrite": {"^/api" : "https://localhost:44365/api"}
   },
 
   "/Resources/*": {
-    "target": "https://localhost:7199/",
+    "target": "https://localhost:44365/",
     "secure": false,
     "logLevel": "debug",
     "changeOrigin": true
   },
 
   "/Images/*": {
-    "target": "https://localhost:7199/",
+    "target": "https://localhost:44365/",
     "secure": false,
     "logLevel": "debug",
     "changeOrigin": true
   },
 
   "/Uploads/*": {
-    "target": "https://localhost:7199/",
+    "target": "https://localhost:44365/",
     "secure": false,
     "logLevel": "debug",
     "changeOrigin": true
   },
 
   "/bankResult/*": {
-    "target": "https://localhost:7199/",
+    "target": "https://localhost:44365/",
     "secure": false,
     "logLevel": "debug",
     "changeOrigin": true

@@ -5,5 +5,6 @@ export interface UserRequest {
   userName?: string;
   name?: string;
   surname?: string;
+  password?:string;
  
 }

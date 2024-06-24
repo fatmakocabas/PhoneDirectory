@@ -37,6 +37,7 @@ export class ViewUserComponent implements OnInit {
     userName:"",
     name: "",
     surname: "",
+    password:"",
 
   };
   deparmentList: Department[] = [];
@@ -111,6 +112,7 @@ export class ViewUserComponent implements OnInit {
       userName: [user?.userName || "", Validators.required],
       name: [user?.name || "", Validators.required],
       surname: [user?.surname || "", Validators.required],
+      password: [user?.password || "", Validators.required],
       
     });
 
@@ -162,6 +164,7 @@ export class ViewUserComponent implements OnInit {
       userName: controls["userName"].value,
       name: controls["name"].value,
       surname: controls["surname"].value,
+      password: controls["password"].value,
     }
 
     this.userService
@@ -220,6 +223,7 @@ export class ViewUserComponent implements OnInit {
       userName: controls["userName"].value,
       name: controls["name"].value,
       surname: controls["surname"].value,
+      password: controls["password"].value,
     }
 
     this.userService.addUser(userRequest)
