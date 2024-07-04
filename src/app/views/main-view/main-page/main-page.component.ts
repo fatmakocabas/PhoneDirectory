@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component, OnInit, OnDestroy } from "@angular/core";
 import { Observable, Subscription, finalize } from "rxjs";
-
+import { MatSnackBar } from "@angular/material/snack-bar";
 import { PersonalService } from "app/shared/services/personal.service";
 @Component({
   selector: "app-main-page",
@@ -11,17 +11,106 @@ export class MainPageComponent implements OnInit, OnDestroy {
   loaded = false;
   personelList: any[];
   currentYear: number;
+  searchTerm: string = "";
+  isHighlighted = false;
   constructor(
     private cdr: ChangeDetectorRef,
-    public personalService: PersonalService
+    public personalService: PersonalService,
+    private snackbar: MatSnackBar
   ) {
-      const currentDate = new Date();
-      this.currentYear = currentDate.getFullYear();  
+    const currentDate = new Date();
+    this.currentYear = currentDate.getFullYear();
   }
 
   ngOnInit() {
     this.loaded = true;
     this.loadPersonels();
+  }
+
+  onSearch(value: string): void {
+    this.searchTerm = value;
+    this.search();
+  }
+  normalizeSearchTerm = (str: string) => {
+    return str.toLocaleLowerCase("tr-TR");
+  };
+
+  search(): void {
+    const normalize = (str: string) => {
+      return str
+        .toLocaleLowerCase("tr-TR")
+        .normalize("NFKD")
+        .replace(/[^\u0000-\u007F]/g, (match) => {
+          switch (match) {
+            case "ı":
+              return "i";
+            case "ü":
+              return "u";
+            case "ö":
+              return "o";
+            case "ç":
+              return "c";
+            case "ş":
+              return "s";
+            case "ğ":
+              return "g";
+            case "İ":
+              return "i";
+            case "Ü":
+              return "u";
+            case "Ö":
+              return "o";
+            case "Ç":
+              return "c";
+            case "Ş":
+              return "s";
+            case "Ğ":
+              return "g";
+            default:
+              return "";
+          }
+        });
+    };
+    const searchTerm = normalize(this.searchTerm);
+    const elements = document.querySelectorAll("[data-person-name]");
+    console.log("Normalized searchTerm: " + normalize(this.searchTerm));
+
+    const matchingElements = Array.from(elements).filter((element) => {
+      const personName = element.getAttribute("data-person-name");
+      const regex = new RegExp(`\\b${searchTerm}\\b`, 'gi');
+      return personName && regex.test(normalize(personName));
+    });
+    
+    if (matchingElements.length > 0) {
+      // Find the currently highlighted element
+      let currentIndex = -1;
+      matchingElements.forEach((element, index) => {
+        if (element.classList.contains("highlight")) {
+          currentIndex = index;
+        }
+      });
+
+      // Determine the index of the next element to highlight
+      let nextIndex = currentIndex + 1;
+      if (nextIndex >= matchingElements.length) {
+        nextIndex = 0; // Loop back to the first element if at the end
+      }
+
+      // Remove highlight from all elements
+      const previousHighlight = document.querySelector(".highlight");
+      if (previousHighlight) {
+        previousHighlight.classList.remove("highlight");
+      }
+
+      // Highlight and scroll to the next element
+      const nextElement = matchingElements[nextIndex] as HTMLElement;
+      if (nextElement) {
+        nextElement.classList.add("highlight");
+        nextElement.scrollIntoView({ behavior: "smooth", block: "center" });
+      }
+    } else {
+      this.snackbar.open("Personel bulunamadı!", undefined, { duration: 3000 });
+    }
   }
 
   ngOnDestroy() {}
@@ -38,11 +127,11 @@ export class MainPageComponent implements OnInit, OnDestroy {
         })
       )
       .subscribe((res) => {
-      this.personelList =res;
+        this.personelList = res;
         if (this.personelList) {
-          debugger;
-          this.personelList = this.personelList.filter(personel => personel.isActive === true);
-          console.log (this.personelList);
+          this.personelList = this.personelList.filter(
+            (personel) => personel.isActive === true
+          );
         }
       });
   }
@@ -54,26 +143,31 @@ export class MainPageComponent implements OnInit, OnDestroy {
     this.uniqueAddresses.forEach((address) => {
       address.departments = this.getDepartmentsByAddress(address);
       address.departments.forEach((department) => {
-        department.orderedPersons = this.getOrderedPersonsByDepartmentAndAddress(department, address);
+        department.orderedPersons =
+          this.getOrderedPersonsByDepartmentAndAddress(department, address);
       });
-  
+
       // Her department için önceki section sıfırlanır
       this.previousSection = null;
-  
+
       // Her department içindeki orderedPersons'ları kontrol ederken önceki section bilgisini kaydeder
       for (let i = 0; i < address.departments.length; i++) {
         const department = address.departments[i];
-  
+
         for (let j = 0; j < department.orderedPersons.length; j++) {
           const person = department.orderedPersons[j];
-  
-          if (person.section && (!this.previousSection || person.section.name !== this.previousSection)) {
+
+          if (
+            person.section &&
+            (!this.previousSection ||
+              person.section.name !== this.previousSection)
+          ) {
             // Eğer person bir sectiona sahipse ve önceki section yoksa veya farklıysa
             person.showSectionTitle = true;
           } else {
             person.showSectionTitle = false;
           }
-  
+
           // Şu andaki person'un section bilgisini kaydeder
           this.previousSection = person.section?.name;
         }
@@ -84,7 +178,9 @@ export class MainPageComponent implements OnInit, OnDestroy {
   uniqueAddressIds = [];
 
   getUniqueAddresses(list: any[]): any[] {
-    list.sort((a, b) => a.department.address.order - b.department.address.order);
+    list.sort(
+      (a, b) => a.department.address.order - b.department.address.order
+    );
     for (const person of list) {
       const addressId = person.department.address.id;
       if (!this.uniqueAddressIds.includes(addressId)) {
@@ -92,7 +188,7 @@ export class MainPageComponent implements OnInit, OnDestroy {
         this.uniqueAddresses.push(person.department.address);
       }
     }
-    
+
     return this.uniqueAddresses;
   }
   getDepartmentsByAddress(address: any): any[] {
@@ -108,9 +204,15 @@ export class MainPageComponent implements OnInit, OnDestroy {
     return departments;
   }
 
-  getOrderedPersonsByDepartmentAndAddress(department: any, address: any): any[] {
-    const orderedPersons = this.getPersonsByDepartmentAndAddress(department, address);
-  
+  getOrderedPersonsByDepartmentAndAddress(
+    department: any,
+    address: any
+  ): any[] {
+    const orderedPersons = this.getPersonsByDepartmentAndAddress(
+      department,
+      address
+    );
+
     // Sıralama işlemini gerçekleştir
     orderedPersons.sort((a, b) => {
       // İlk olarak boş section olanları öne getir
@@ -119,7 +221,7 @@ export class MainPageComponent implements OnInit, OnDestroy {
       } else if (a.section && !b.section) {
         return 1;
       }
-  
+
       // Eğer her iki personel de bir section'a sahipse sıralama yap
       if (a.section && b.section) {
         if (a.section.name === b.section.name) {
@@ -130,13 +232,13 @@ export class MainPageComponent implements OnInit, OnDestroy {
           return a.section.name.localeCompare(b.section.name);
         }
       }
-  
+
       // Her ikisi de bir section'a sahip değilse, önce department order'a, sonra person order'a göre sırala
       return a.department.order !== b.department.order
         ? a.department.order - b.department.order
         : a.order - b.order;
     });
-  
+
     return orderedPersons;
   }
   getPersonsByDepartmentAndAddress(department: any, address: any): any[] {

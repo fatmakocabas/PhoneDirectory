@@ -1,9 +1,16 @@
-<div class="search-bar-wide " [ngClass]="{ open: isOpen }">
+<div class="search-bar-wide always-open">
+  <div>
+      <input 
+      autoFocus 
+      [formControl]="searchCtrl" 
+      class="default-bg" 
+      type="text" 
+      [placeholder]="placeholder" 
+      (keydown.enter)="onEnter($event)"
+    />
+  </div>
   <button mat-icon-button class="search-icon-btn ml-8 mr-8" (click)="open()">
     <mat-icon>search</mat-icon>
   </button>
-  <div>
-    <input autoFocus [formControl]="searchCtrl" class="default-bg" type="text" [placeholder]="placeholder" />
-  </div>
   <mat-icon class="search-close text-muted" (click)="close()">close</mat-icon>
 </div>

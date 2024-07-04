@@ -18,6 +18,7 @@ import { MatRadioModule } from "@angular/material/radio";
 import { MatTabsModule } from "@angular/material/tabs";
 import { MatInputModule } from "@angular/material/input";
 import { MatProgressBarModule } from "@angular/material/progress-bar";
+import { SearchModule } from "app/shared/search/search.module";
 
 @NgModule({
   declarations: [MainPageComponent],
@@ -37,7 +38,8 @@ import { MatProgressBarModule } from "@angular/material/progress-bar";
     MatProgressBarModule,
     CommonModule,
     MatTableModule,
-    MatPaginatorModule,
+    MatPaginatorModule, 
+    SearchModule,   
     MainViewRoutingModule
   ]
 })

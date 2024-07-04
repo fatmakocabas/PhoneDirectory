@@ -11,7 +11,8 @@ import { UntypedFormControl } from "@angular/forms";
 import { Subscription } from "rxjs";
 import { debounceTime } from "rxjs/operators";
 import { SearchService } from "../search.service";
-import { Router, ActivatedRoute } from "@angular/router";
+import { Router } from "@angular/router";
+import { MatSnackBar } from "@angular/material/snack-bar";
 import { AutoFocusDirective } from "app/shared/directives/auto-focus.directive";
 
 @Component({
@@ -20,24 +21,21 @@ import { AutoFocusDirective } from "app/shared/directives/auto-focus.directive";
   styleUrls: ["./search-input-over.component.scss"]
 })
 export class SearchInputOverComponent implements OnInit, OnDestroy {
-  isOpen: boolean;
   @ViewChildren(AutoFocusDirective) searchInput;
   @Input('resultPage') resultPage: string;
   @Input('placeholder') placeholder: string = "Search here";
-  @Output("search") search = new EventEmitter();
+  @Output("search") search = new EventEmitter<string>();
   searchCtrl = new UntypedFormControl();
   searchCtrlSub: Subscription;
+
   constructor(
       private searchService: SearchService,
-      private router: Router
+      private router: Router,
+      private snackbar: MatSnackBar // MatSnackBar ekledik
   ) {}
 
   ngOnInit() {
-    this.searchCtrl.valueChanges.pipe(debounceTime(200))
-    .subscribe(value => {
-      this.search.emit(value);
-      this.searchService.searchTerm.next(value);
-    });
+    this.searchCtrlSub = this.searchCtrl.valueChanges.pipe(debounceTime(200)).subscribe();
   }
 
   ngOnDestroy() {
@@ -45,23 +43,28 @@ export class SearchInputOverComponent implements OnInit, OnDestroy {
       this.searchCtrlSub.unsubscribe();
     }
   }
+
+  open() {
+    this.navigateToResult();
+    const value = this.searchCtrl.value;
+    this.search.emit(value);
+  }
+
   navigateToResult() {
-    if(this.resultPage) {
+    if (this.resultPage) {
         this.router.navigateByUrl(this.resultPage);
     }
   }
-  open() {
-    this.isOpen = true;
-    this.navigateToResult();
 
-    setTimeout(() => {
-      this.searchInput.first.focus();
-    })
-  }
   close() {
-    this.isOpen = false;
+    this.searchCtrl.setValue('');
   }
-  toggle() {
-    this.isOpen = !this.isOpen;
+
+  onEnter(event: KeyboardEvent): void {
+    if (event.key === 'Enter') {
+      event.preventDefault();
+      const value = this.searchCtrl.value;
+      this.search.emit(value);
+    }
   }
 }

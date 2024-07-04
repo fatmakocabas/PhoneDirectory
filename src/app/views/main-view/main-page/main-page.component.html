@@ -3,6 +3,10 @@
     <a routerLink='/admin'>
       <span class="adminStyle" >admin</span>
     </a>
+    <matx-search-input-over
+    [placeholder]="'Ara...'"
+    (search)="onSearch($event)"
+  ></matx-search-input-over>
   </div>
   <div><a routerLink='/'>
     <img src="./assets/images/logo.png" style="width: 175px;" alt="Rehber">
@@ -34,6 +38,7 @@
               <div class="title">
                 <h2 style="color: #17469e; font-weight: bold;">{{ department.name }}</h2>
                 <h5 style="color: #589945; font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; width:175px; text-align: right; font-size: 13px;">{{ department.fax }}</h5>
+
             </div>
             </div>
             <mat-divider></mat-divider>
@@ -56,12 +61,13 @@
                         <td colspan="4" style="font-size: 12px; font-weight: bold;" class="section-title">{{ person.section.name || '' }}</td>
                       </tr>
                     </ng-container>
-                    <tr style="font-size: 12px;">
-                      <td>{{ i + 1 }}</td>
-                      <td>{{ person.firstName }} {{ person.lastName }}</td>
-                      <!--<td>{{ person.title }}</td>-->
-                      <td>{{ person.ext }}</td>
-                    </tr>
+                    <tr style="font-size: 12px;" [attr.data-person-name]="(person.firstName + ' ' + person.lastName).toLowerCase()"
+                    >
+                    <td>{{ i + 1 }}</td>
+                    <td>{{ person.firstName }} {{ person.lastName }}</td>
+                    <!--<td>{{ person.title }}</td>-->
+                    <td>{{ person.ext }}</td>
+                </tr>
                   </ng-container>
                 </ng-container>
                 <ng-template #noPersons>
