@@ -1,8 +1,5 @@
 <div style="display: flex;">
-  <div style="position: absolute; top: 5px; right: 5px;">
-    <a routerLink='/admin'>
-      <span class="adminStyle" >admin</span>
-    </a>
+  <div style="position: absolute; top: 25px; right: 15px;">   
     <matx-search-input-over
     [placeholder]="'Ara...'"
     (search)="onSearch($event)"
@@ -10,7 +7,9 @@
   </div>
   <div><a routerLink='/'>
     <img src="./assets/images/logo.png" style="width: 175px;" alt="Rehber">
-  </a></div>
+  </a>
+  
+</div>
  
   <div style="justify-content: space-between;
       width: 100%;
@@ -22,7 +21,11 @@
       font-weight: bold;
       color: #17469e;
   ">
+
   <span>Müdürlük Dahili Telefon Listesi</span>
+  <a routerLink='/admin'>
+    <span class="adminStyle" >admin</span>
+  </a>
 </div>
 </div>
 <div class="outer-container">
