@@ -18,6 +18,8 @@ import { ViewDepartmentComponent } from "./department/view-department/view-depar
 import { AddressesComponent } from "./address/addresses.component";
 import { ViewAddressComponent } from "./address/view-address/view-address.component";
 import { FormsModule } from '@angular/forms';
+import { SectionsComponent } from "./section/sections.component";
+import { ViewSectionComponent } from "./section/view-section/view-section.component";
 
 @NgModule({
   imports: [
@@ -33,7 +35,7 @@ import { FormsModule } from '@angular/forms';
     SharedPipesModule,
     RouterModule.forChild(DashboardRoutes)
   ],
-  declarations: [AnalyticsComponent,PersonalsComponent, ViewPersonalComponent,UsersComponent, ViewUserComponent,DepartmentsComponent,ViewDepartmentComponent,AddressesComponent,ViewAddressComponent],
+  declarations: [AnalyticsComponent,PersonalsComponent, ViewPersonalComponent, UsersComponent, ViewUserComponent,DepartmentsComponent,ViewDepartmentComponent,SectionsComponent,ViewSectionComponent, AddressesComponent,ViewAddressComponent],
   exports: []
 })
 export class DashboardModule {}

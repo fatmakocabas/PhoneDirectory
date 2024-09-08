@@ -43,16 +43,22 @@ export class NavigationService {
       icon: 'person',
     },
     {
+      name: 'Adresler',
+      state: 'admin/addresses',
+      type: 'link',
+      icon: 'subject',
+    },
+    {
       name: 'Müdürlükler',
       state: 'admin/departments',
       type: 'link',
       icon: 'library_books',
     },
     {
-      name: 'Adresler',
-      state: 'admin/addresses',
+      name: 'Birimler',
+      state: 'admin/sections',
       type: 'link',
-      icon: 'subject',
+      icon: 'account_tree',
     },
     {
       name: 'Kullanıcılar',

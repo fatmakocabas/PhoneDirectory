@@ -1,0 +1,92 @@
+<mat-card class="p-0">
+    <mat-card-title class="align-items-center">
+        <div class="card-title-container ">
+            <div class="card-title-text ">Birim</div>
+            <div class="back-icon"> 
+            <a routerLink="/admin/sections" color="primary" mat-raised-button class="back-button">
+                <mat-icon>chevron_left</mat-icon>
+            </a>
+        </div>
+        </div>
+     
+        <mat-divider></mat-divider>
+      
+    </mat-card-title>
+    <mat-card-content>
+        <div *ngIf="sectionForm">
+            <form [formGroup]="sectionForm">
+                <div fxLayout="row wrap">
+                    <div fxFlex="100" fxFlex.gt-xs="50" class="pr-16">
+                        <div class="pb-16">
+                            <mat-form-field class="full-width">
+                                <input matInput name="name" formControlName="name" placeholder="Birim Adı"
+                                    value="">
+                            </mat-form-field>
+                            <small
+                                *ngIf="sectionForm.controls['name'].hasError('required') && sectionForm.controls['name'].touched"
+                                class="form-error-msg">Müdürlük Adı zorunlu </small>
+                        </div>
+                        <div class="pb-16">
+                            <mat-form-field class="full-width">
+                                <input matInput name="description" formControlName="description" placeholder="Açıklama"
+                                    value="">
+                            </mat-form-field>
+                            
+                        </div>
+                        <div class="pb-16">
+                            <div class="flex-container">   
+                            <mat-form-field  class="flex-item" appearance="outline">
+                                <mat-select name="department" formControlName="department"  placeholder="Müdürlük" [required]="true">
+                                    <mat-option *ngFor="let department of deparmentList" [value]="department.id">
+                                        {{ department.name }}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>                           
+                            <mat-form-field class="flex-item">
+                                <input 
+                                  matInput 
+                                  type="number" 
+                                  name="order" 
+                                  formControlName="order" 
+                                  placeholder="Sıra" 
+                                  [min]="1" 
+                                  [max]="20"
+                                />
+                                <mat-error *ngIf="orderControl.hasError('required')">
+                                  Sıra numarası gerekli
+                                </mat-error>
+                                <mat-error *ngIf="orderControl.hasError('min')">
+                                  Sıra numarası 1'den küçük olamaz
+                                </mat-error>
+                                <mat-error *ngIf="orderControl.hasError('max')">
+                                  Sıra numarası 20'dan büyük olamaz
+                                </mat-error>
+                              </mat-form-field>
+                              
+                            </div>
+                         
+                        </div>                   
+               
+                    </div>
+
+                    <div fxFlex="100" fxFlex.gt-xs="50">
+                      
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-12">
+                      <div class="row between-xs" *ngIf="!isNewSection">
+                        <button mat-raised-button color="primary" (click)="onUpdate()" [disabled]="sectionForm.invalid">Kaydet</button>
+                        <button mat-raised-button color="warn" style="margin-left: 10px;" (click)="openDeleteConfirmationDialog()" [disabled]="sectionForm.invalid">Sil</button>
+                      </div>
+                      <div class="row between-xs" *ngIf="isNewSection">
+                        <button mat-raised-button color="primary" (click)="onAdd()" [disabled]="sectionForm.invalid">Kaydet</button>
+                      </div>
+                    </div>
+                  </div>
+            </form>
+
+        </div>
+    </mat-card-content>
+</mat-card>

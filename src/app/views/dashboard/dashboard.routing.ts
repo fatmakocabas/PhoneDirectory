@@ -8,6 +8,8 @@ import { DepartmentsComponent } from "./department/departments.component";
 import { ViewDepartmentComponent } from "./department/view-department/view-department.component";
 import { AddressesComponent } from "./address/addresses.component";
 import { ViewAddressComponent } from "./address/view-address/view-address.component";
+import { ViewSectionComponent } from "./section/view-section/view-section.component";
+import { SectionsComponent } from "./section/sections.component";
 
 
 export const DashboardRoutes: Routes = [
@@ -50,6 +52,16 @@ export const DashboardRoutes: Routes = [
     path:'departments/:id',
     component:ViewDepartmentComponent,
     data: { title: 'Müdürlük', breadcrumb: 'Müdürlük'}
+  },
+  {
+    path: "sections",
+    component: SectionsComponent,
+    data: { title: 'REHBER', breadcrumb: 'Birim Listesi'}
+  },
+  {
+    path:'sections/:id',
+    component:ViewSectionComponent,
+    data: { title: 'Birim', breadcrumb: 'Birim'}
   },
   {
     path: "addresses",

@@ -179,11 +179,20 @@ export class ViewDepartmentComponent implements OnInit {
         (error) => {      
           debugger;    
           const regex = /foreignkey/i; // "FK_Personal_Section_SectionId"
+          const order = /orderAlreadyUse/;
+          const name = /isNameInUse/;
           if (error?.error && regex.test(error.error)) {
            this.snackbar.open("Silmeye çalıştığınız birimde, bir veya daha fazla çalışan bu birime bağlıdır.", undefined, { duration: 2000 });
-          }          
+          }   
+          else if (error?.error && order.test(error.error)) {
+            this.snackbar.open(" Bu sıra başka bir departman tarafından kullanılmış. ", undefined, { duration: 2000 });
+           }  
+           else if (error?.error && name.test(error.error)) {
+            this.snackbar.open( "Bu isim başka bir departman tarafından kullanılmış.", undefined, { duration: 2000 });
+           } 
+              
            else {
-            this.snackbar.open(error?.error , undefined, { duration: 2000 });
+            this.snackbar.open(error?.error, undefined, { duration: 2000 }); 
           }
         }
       );
@@ -212,6 +221,9 @@ export class ViewDepartmentComponent implements OnInit {
          }
       }
     )
+  }
+  get orderControl() {
+    return this.departmentForm.get('order');
   }
 
   onAddressSelectionChange(event: MatSelectChange): void {
@@ -246,10 +258,20 @@ export class ViewDepartmentComponent implements OnInit {
 
       },
       (error) =>{
-         this.snackbar.open('Eklemeye çalıştığınız adres, kat ve sıra aynı olmamalıdır.',undefined,{
-           duration: 2000
-         })
 
+        const order = /orderAlreadyUse/;
+        const name = /isNameInUse/;
+        if (error?.error && order.test(error.error)) {
+          this.snackbar.open(" Bu sıra başka bir departman tarafından kullanılmış. ", undefined, { duration: 2000 });
+         }  
+         else if (error?.error && name.test(error.error)) {
+          this.snackbar.open( "Bu isim başka bir departman tarafından kullanılmış.", undefined, { duration: 2000 });
+         } 
+            
+         else {
+          this.snackbar.open("Eklemeye çalışırken hata oluştu. Hata: " + error?.error, undefined, { duration: 2000 }); 
+        }
+      
      }
     )
   }

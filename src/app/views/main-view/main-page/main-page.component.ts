@@ -25,6 +25,7 @@ export class MainPageComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.loaded = true;
     this.loadPersonels();
+   
   }
 
   onSearch(value: string): void {
@@ -116,7 +117,7 @@ export class MainPageComponent implements OnInit, OnDestroy {
   ngOnDestroy() {}
   loadPersonels() {
     this.loaded = false;
-
+    
     this.personalService
       .allPersonels()
       .pipe(
@@ -149,7 +150,7 @@ export class MainPageComponent implements OnInit, OnDestroy {
 
       // Her department için önceki section sıfırlanır
       this.previousSection = null;
-
+      
       // Her department içindeki orderedPersons'ları kontrol ederken önceki section bilgisini kaydeder
       for (let i = 0; i < address.departments.length; i++) {
         const department = address.departments[i];
@@ -188,7 +189,7 @@ export class MainPageComponent implements OnInit, OnDestroy {
         this.uniqueAddresses.push(person.department.address);
       }
     }
-
+    console.log("adres adedi:"+ this.uniqueAddresses.length);
     return this.uniqueAddresses;
   }
   getDepartmentsByAddress(address: any): any[] {
