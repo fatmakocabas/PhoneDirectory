@@ -230,7 +230,9 @@ export class MainPageComponent implements OnInit, OnDestroy {
           return a.order - b.order;
         } else {
           // Farklı section'larda ise section ismine göre sırala
-          return a.section.name.localeCompare(b.section.name);
+          // return a.section.name.localeCompare(b.section.name);
+            // Talep no: 822834 ya göre  sectionlar sectionı order'a göre sıralama sağlandı
+        return a.section.order - b.section.order;
         }
       }
 
